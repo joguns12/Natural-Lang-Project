@@ -1,0 +1,565 @@
+sentence,pronoun,candidates,label
+The sniper shot the terrorist because he was a bad guy.,he,"['The sniper', 'the terrorist']",1
+The sniper shot the terrorist because he had orders.,he,"['The sniper', 'the terrorist']",0
+The chimpanzee could not use Linux because it was an animal.,it,"['The chimpanzee', 'Linux']",0
+The chimpanzee could not use Linux because it uses different commands than Windows.,it,"['The chimpanzee', 'Linux']",1
+Bill punched Bob in the face because he was being rude to Mary.,he,"['Bill', 'Bob']",1
+Bill punched Bob in the face because he wanted to protect Mary.,he,"['Bill', 'Bob']",0
+"Carl borrowed a book from Richard, but the book was never returned to him.",him,"['Carl', 'Richard']",1
+"Carl borrowed a book from Richard, but the book was unreadable to him.",him,"['Carl', 'Richard']",0
+Bill likes to play with Bob because he loves playing.,he,"['Bill', 'Bob']",0
+Bill likes to play with Bob but he did not want to.,he,"['Bill', 'Bob']",1
+The salesperson told Dave that this would be the best car he ever bought.,he,"['The salesperson', 'Dave']",1
+The salesperson told Dave that this would be the best car he ever sold.,he,"['The salesperson', 'Dave']",0
+The student wanted to ask the professor for help but decided not to because he was too scared.,he,"['The student', 'the professor']",0
+The student wanted to ask the professor for help but decided not to because he was too intimidating.,he,"['The student', 'the professor']",1
+The student couldn't understand the teacher because he had an accent.,he,"['The student', 'the teacher']",1
+The student couldn't understand the teacher because he wasn't paying attention.,he,"['The student', 'the teacher']",0
+The campers turned on their flashlights because it was dark without them.,them,"['The campers', 'their flashlights']",1
+The campers turned on their flashlights because the darkness scared them.,them,"['The campers', 'their flashlights']",0
+Francis stopped and looked at the penguin because he was intrigued.,he,"['Francis', 'the penguin']",0
+Francis stopped and looked at the penguin because he was cute.,he,"['Francis', 'the penguin']",1
+The off-campus apartments were preferred to the on-campus apartments because they were cheaper.,they,"['The off-campus apartments', 'the on-campus apartments']",0
+The off-campus apartments were preferred to the on-campus apartments because they were more expensive.,they,"['The off-campus apartments', 'the on-campus apartments']",1
+The general fired his pistol at the monster so he could be a distraction.,he,"['The general', 'the monster']",0
+The general fired his pistol at the monster so he turned and looked.,he,"['The general', 'the monster']",1
+Liverpool lost to Manchester United because they had been mismanaged all season.,they,"['Liverpool', 'Manchester United']",0
+Liverpool lost to Manchester United because they were a superior team.,they,"['Liverpool', 'Manchester United']",1
+"Rice beat Texas, even though they were a smaller school.",they,"['Rice', 'Texas']",0
+"Rice beat Texas, even though they were the best team in the nation.",they,"['Rice', 'Texas']",1
+The state executes prisoners because they want justice.,they,"['The state', 'prisoners']",0
+The state executes prisoners because they were convicted of heinous crimes.,they,"['The state', 'prisoners']",1
+"Jason built Rocky a robot, and he gave it to him.",he,"['Jason', 'Rocky']",0
+"Jason built Rocky a robot, so he had more free time.",he,"['Jason', 'Rocky']",1
+My heart pumps blood because it is liquid.,it,"['My heart', 'blood']",1
+My heart pumps blood because it is a muscle.,it,"['My heart', 'blood']",0
+Joe smells better than Adam since he showers regularly.,he,"['Joe', 'Adam']",0
+Joe smells better than Adam since he hardly ever showers.,he,"['Joe', 'Adam']",1
+The pen is mightier than the sword because it can only stab things.,it,"['The pen', 'the sword']",1
+The pen is mightier than the sword because it can be used to write world-changing documents.,it,"['The pen', 'the sword']",0
+The cats attacked the humans because they were feral.,they,"['The cats', 'the humans']",0
+The cats attacked the humans because they smelled like fish.,they,"['The cats', 'the humans']",1
+Bob can beat Larry at arm wrestling because he has more muscles.,he,"['Bob', 'Larry']",0
+Bob can beat Larry at arm wrestling because he is a toddler.,he,"['Bob', 'Larry']",1
+Donald kicked King but he never cried.,he,"['Donald', 'King']",1
+Donald kicked King but he never felt bad.,he,"['Donald', 'King']",0
+Steve went to the meeting with John because he was asked to.,he,"['Steve', 'John']",0
+Steve went to the meeting with John because he asked him to.,he,"['Steve', 'John']",1
+Mary gave Sandy her book because she needed it.,she,"['Mary', 'Sandy']",1
+Mary gave Sandy her book because she is generous.,she,"['Mary', 'Sandy']",0
+John visited Luke in the hospital because he was sick.,he,"['John', 'Luke']",1
+John visited Luke in the hospital because he lived close by.,he,"['John', 'Luke']",0
+John hired Bill because he needed someone.,he,"['John', 'Bill']",0
+John fired Bill because he was incompetent.,he,"['John', 'Bill']",1
+John introduced Bill because he knew everyone.,he,"['John', 'Bill']",0
+John introduced Bill because he was new.,he,"['John', 'Bill']",1
+John shot Bill and he was jailed.,he,"['John', 'Bill']",0
+John shot Bill and he died.,he,"['John', 'Bill']",1
+"The Mad Hatter tried to offer a cup of tea to the March Hare, but his hat was too distracting.",his,"['The Mad Hatter', 'the March Hare']",0
+"The Mad Hatter tried to offer a cup of tea to the March Hare, but his long ears were too distracting.",his,"['The Mad Hatter', 'the March Hare']",1
+Richard blackmailed Senator Carson so that his silence would be secured.,his,"['Richard', 'Senator Carson']",1
+Richard blackmailed Senator Carson so that his rise to power would be secured.,his,"['Richard', 'Senator Carson']",0
+"Tradition dictated the captain hold the Stanley Cup first, and it was pretty.",it,"['Tradition', 'the Stanley Cup']",1
+"Tradition dictated the captain hold the Stanley Cup first, and it is always followed.",it,"['Tradition', 'the Stanley Cup']",0
+The bat hit the ball because it was designed to hit.,it,"['The bat', 'the ball']",0
+The bat hit the ball because it was designed to be hit.,it,"['The bat', 'the ball']",1
+The program could successfully parse the file because it was programmed well.,it,"['The program', 'the file']",0
+The program could successfully parse the file because it was formatted well.,it,"['The program', 'the file']",1
+The article about the fires said that they torched most of Seattle.,they,"['The article', 'the fires']",1
+The article about the fires said that they would research the situation further.,they,"['The article', 'the fires']",0
+The winners were given the awards after they won.,they,"['The winners', 'the awards']",0
+The winners were given the awards after they were made.,they,"['The winners', 'the awards']",1
+The man jumped on the neighbor's pool and he swam.,he,"['The man', 'the neighbor']",0
+The man jumped on the neighbor's pool and he stared.,he,"['The man', 'the neighbor']",1
+"The team shredded the report, so that it could rewrite a new one.",it,"['The team', 'the report']",0
+"The team shredded the report, so that it could be rewritten.",it,"['The team', 'the report']",1
+Bob asked Tom if he could take him to the movies.,he,"['Bob', 'Tom']",0
+Bob asked Tom if he could lend some money.,he,"['Bob', 'Tom']",1
+Homer punched Flanders because he was being annoying.,he,"['Homer', 'Flanders']",1
+Homer punched Flanders because he was asked to.,he,"['Homer', 'Flanders']",0
+Nelson punched Milhouse but he was not hurt.,he,"['Nelson', 'Milhouse']",1
+Nelson punched Milhouse but he was not caught.,he,"['Nelson', 'Milhouse']",0
+The mermaid swam toward Sue and made her gasp.,her,"['The mermaid', 'Sue']",1
+The mermaid swam toward Sue and waved her tail.,her,"['The mermaid', 'Sue']",0
+The mother bear attacked Karen because she had gotten too close to her cub.,she,"['The mother bear', 'Karen']",1
+The mother bear attacked Karen because she was worried for her cub.,she,"['The mother bear', 'Karen']",0
+"Mary smiled at Susan, but she did not smile back.",she,"['Mary', 'Susan']",1
+"Mary smiled at Susan, but she was not happy to see her.",she,"['Mary', 'Susan']",0
+The leech latched onto the hippo so that it could enjoy the sunshine.,it,"['The leech', 'the hippo']",1
+The leech latched onto the hippo because it was hungry.,it,"['The leech', 'the hippo']",0
+The people protested the government because they were hungry.,they,"['The people', 'the government']",0
+The people protested the government because they were raising taxes.,they,"['The people', 'the government']",1
+I drank the beer with a lime because it was cold.,it,"['the beer', 'a lime']",0
+I drank the beer with a lime because it was sour.,it,"['the beer', 'a lime']",1
+The employer talked to the employee about being loyal to him.,him,"['The employer', 'the employee']",0
+The employer talked to the employee about firing him.,him,"['The employer', 'the employee']",1
+A chicken pecked at a bug and it ate it.,it,"['A chicken', 'a bug']",0
+A chicken pecked at a bug and it ran away.,it,"['A chicken', 'a bug']",1
+The dogs hate the fleas because they suck blood.,they,"['The dogs', 'the fleas']",1
+The dogs hate the fleas because they hate bugs.,they,"['The dogs', 'the fleas']",0
+Steven Seagal challenged Jean Claude Van Damme to a fight because he wanted to prove he was the stronger man.,he,"['Steven Seagal', 'Jean Claude Van Damme']",0
+Steven Seagal challenged Jean Claude Van Damme to a fight because he is a worthy opponent.,he,"['Steven Seagal', 'Jean Claude Van Damme']",1
+Girls like puppies because they are adorable.,they,"['Girls', 'puppies']",1
+Girls like puppies because they like adorable things.,they,"['Girls', 'puppies']",0
+Jack got more votes than John because the people liked him.,him,"['Jack', 'John']",0
+Jack got more votes than John because the people did not like him.,him,"['Jack', 'John']",1
+The car passed the truck because it was going too slow.,it,"['The car', 'the truck']",1
+The car passed the truck because it needed to go faster.,it,"['The car', 'the truck']",0
+My phone is working better than your phone because it is a newer model.,it,"['My phone', 'your phone']",0
+My phone is working better than your phone because it is broken.,it,"['My phone', 'your phone']",1
+Raja wanted Rena to take the job because he would be a good candidate.,he,"['Raja', 'Rena']",1
+Raja wanted Rena to take the job because he wanted to leave.,he,"['Raja', 'Rena']",0
+"Sheila tried to repair the old jalopy, even though she had not run in three decades.",she,"['Sheila', 'the old jalopy']",1
+"Sheila tried to repair the old jalopy, even though she had not worked on cars in three decades.",she,"['Sheila', 'the old jalopy']",0
+The ghost entered the house because it was haunting.,it,"['The ghost', 'the house']",0
+The ghost entered the house because it was haunted.,it,"['The ghost', 'the house']",1
+The boy escaped the cop but he continued to flee.,he,"['The boy', 'the cop']",0
+The boy escaped the cop but he continued to search.,he,"['The boy', 'the cop']",1
+The needle punctured the skin but it failed to register pain.,it,"['The needle', 'the skin']",1
+The needle punctured the skin but it failed to administer pain.,it,"['The needle', 'the skin']",0
+The lion saw the fish and it pounced.,it,"['The lion', 'the fish']",0
+The lion saw the fish and it was swimming.,it,"['The lion', 'the fish']",1
+The clown smiled at the child and he cried.,he,"['The clown', 'the child']",1
+The clown smiled at the child and he offered him a balloon.,he,"['The clown', 'the child']",0
+The scientists gave the chimps some bananas because they were hungry.,they,"['the chimps', 'some bananas']",0
+The scientists gave the chimps some bananas because they were ripe.,they,"['the chimps', 'some bananas']",1
+The boss fired the worker when he stopped performing well.,he,"['The boss', 'the worker']",1
+The boss fired the worker when he called him into the office.,he,"['The boss', 'the worker']",0
+The outlet powered the lamp when it had electricity.,it,"['The outlet', 'the lamp']",0
+The outlet powered the lamp when it was plugged in.,it,"['The outlet', 'the lamp']",1
+The paintball player was mad at the referee because he missed a call.,he,"['The paintball player', 'the referee']",1
+The paintball player was mad at the referee because he was called out but shouldn't.,he,"['The paintball player', 'the referee']",0
+The network heads cancelled the TV shows because they were not doing well.,they,"['The network heads', 'the TV shows']",1
+The network heads cancelled the TV shows because they did not like the content.,they,"['The network heads', 'the TV shows']",0
+The cheetah outran the antelope so it got to eat.,it,"['The cheetah', 'the antelope']",0
+The cheetah outran the antelope so it got eaten.,it,"['The cheetah', 'the antelope']",1
+The keys typed the words because they were meant to be typed.,they,"['The keys', 'the words']",1
+The keys typed the words because they were meant to be typed on.,they,"['The keys', 'the words']",0
+The racquetball players were annoyed by the other students in the activity center because they were using the racquetball courts to play badminton.,they,"['The racquetball players', 'the other students']",1
+The racquetball players were annoyed by the other students in the activity center because they wanted to play and couldn't.,they,"['The racquetball players', 'the other students']",0
+The teachers scolded the students because they would not learn the material.,they,"['The teachers', 'the students']",1
+The teachers scolded the students because they were the authority figures.,they,"['The teachers', 'the students']",0
+The plane was in the sky and it was fast.,it,"['The plane', 'the sky']",0
+The plane was in the sky and it was cloudy.,it,"['The plane', 'the sky']",1
+Joe crashed into Mike and he had to pay for the damage.,he,"['Joe', 'Mike']",1
+Joe crashed into Mike because he needed a place to sleep.,he,"['Joe', 'Mike']",0
+The man shot his friend and he died.,he,"['The man', 'his friend']",1
+The man shot his friend and he was arrested.,he,"['The man', 'his friend']",0
+The man killed the boss because he hated the job.,he,"['The man', 'the boss']",0
+The man killed the boss because he fired him.,he,"['The man', 'the boss']",1
+Joe raced against Steven because he thought it would be easy.,he,"['Joe', 'Steven']",0
+Joe raced against Steven because he would not say no.,he,"['Joe', 'Steven']",1
+The light hit the mirror and it reflected.,it,"['The light', 'the mirror']",0
+The light hit the mirror and it shattered.,it,"['The light', 'the mirror']",1
+Google Plus is expected to be a replacement for Facebook but it still does not have enough active users.,it,"['Google Plus', 'Facebook']",0
+Google Plus is expected to be a replacement for Facebook but it still has a lot more active users.,it,"['Google Plus', 'Facebook']",1
+The spear easily pierced through the armor because it was too sharp.,it,"['The spear', 'the armor']",0
+The spear easily pierced through the armor because it was too thin.,it,"['The spear', 'the armor']",1
+The cat caught the mouse because it was clever.,it,"['The cat', 'the mouse']",0
+The cat caught the mouse because it was careless.,it,"['The cat', 'the mouse']",1
+"Joseph did not defeat William in the match, so he paid $100.",he,"['Joseph', 'William']",0
+"Joseph did not defeat William in the match, so he earned $100.",he,"['Joseph', 'William']",1
+"Adam failed to kill Alexander, so he hired a bodygaurd in case of a second attempt.",he,"['Adam', 'Alexander']",1
+"Adam failed to kill Alexander, so he hired an assassin for the second attempt.",he,"['Adam', 'Alexander']",0
+"The bowl had a crack, so it was filled in.",it,"['The bowl', 'a crack']",1
+"The bowl had a crack, so it was thrown away.",it,"['The bowl', 'a crack']",0
+The student told the instructor that he was sick.,he,"['The student', 'the instructor']",0
+The student told the instructor that he talked fast.,he,"['The student', 'the instructor']",1
+Joe put Bob in the time machine and he went to the future.,he,"['Joe', 'Bob']",1
+Joe put Bob in the time machine and he created another one.,he,"['Joe', 'Bob']",0
+Bill asked Joe if he could borrow some money.,he,"['Bill', 'Joe']",0
+Bill asked Joe if he had any money.,he,"['Bill', 'Joe']",1
+The chef held the waiter so that he would not flee.,he,"['The chef', 'the waiter']",1
+The chef held the waiter so that he did not fall off.,he,"['The chef', 'the waiter']",0
+Tony helped Jeff because he wanted to help.,he,"['Tony', 'Jeff']",0
+Tony helped Jeff because he needed help.,he,"['Tony', 'Jeff']",1
+The cat was afraid of the dog because it was scary.,it,"['The cat', 'the dog']",1
+The cat was afraid of the dog because it was timid.,it,"['The cat', 'the dog']",0
+The violin fell off the table because someone knocked it off.,it,"['The violin', 'the table']",0
+The violin fell off the table because it was unstable.,it,"['The violin', 'the table']",1
+Lily gave Amber a hug because she was sad.,she,"['Lily', 'Amber']",1
+Lily gave Amber a hug because she was sorry.,she,"['Lily', 'Amber']",0
+The birds ate the seeds because they were hungry.,they,"['The birds', 'the seeds']",0
+The birds ate the seeds because they were tasty.,they,"['The birds', 'the seeds']",1
+"Josie did not like Sarah, but she did not know it.",she,"['Josie', 'Sarah']",1
+"Josie did not like Sarah, but she did not tell her.",she,"['Josie', 'Sarah']",0
+Ken tried to sneak past the boss because he was late for work.,he,"['Ken', 'the boss']",0
+Ken tried to sneak past the boss because he was looking for late people.,he,"['Ken', 'the boss']",1
+The hyenas scavenged from the lions because they were desperate.,they,"['The hyenas', 'the lions']",0
+The hyenas scavenged from the lions because they had left scraps.,they,"['The hyenas', 'the lions']",1
+The fisherman hooked a big fish but he got away.,he,"['The fisherman', 'a big fish']",1
+The fisherman hooked a big fish but he dropped his pole.,he,"['The fisherman', 'a big fish']",0
+The geology department petitioned the school board for money because they needed funding.,they,"['The geology department', 'the school board']",0
+The geology department petitioned the school board for money because they could grant funding.,they,"['The geology department', 'the school board']",1
+"George scored against Thomas in the shootout, so he won the game.",he,"['George', 'Thomas']",0
+"George scored against Thomas in the shootout, so he lost the game.",he,"['George', 'Thomas']",1
+Lakshman asked Vivan to get him some ice cream because he was hot.,he,"['Lakshman', 'Vivan']",0
+Lakshman asked Vivan to get him some ice cream because he owed him money.,he,"['Lakshman', 'Vivan']",1
+Yuri owed Ivan money because he paid for the vodka.,he,"['Yuri', 'Ivan']",1
+Yuri owed Ivan money because he lost the bet.,he,"['Yuri', 'Ivan']",0
+Steve hired Jose because he was a hard worker.,he,"['Steve', 'Jose']",1
+Steve hired Jose because he could not find anyone better.,he,"['Steve', 'Jose']",0
+"The outlaw shot the sheriff, but he did not shoot the deputy.",he,"['The outlaw', 'the sheriff']",0
+"The outlaw shot the sheriff, but he shot back.",he,"['The outlaw', 'the sheriff']",1
+"Kelly neglected to tell Katie that their rent was due, but she told her later.",she,"['Kelly', 'Katie']",0
+"Kelly neglected to tell Katie that their rent was due, but she remembered that it was due on the first of every month.",she,"['Kelly', 'Katie']",1
+"The committee increased the price of the tickets to the dance for the students, but they did not like it.",they,"['The committee', 'the students']",1
+"The committee increased the price of the tickets to the dance for the students, but they changed their decision later.",they,"['The committee', 'the students']",0
+John wanted George to run for President because he was a great governor.,he,"['John', 'George']",1
+John wanted George to run for President because he did not want to.,he,"['John', 'George']",0
+"Olivia wants to make amends with Emily, but she is apprehensive.",she,"['Olivia', 'Emily']",0
+"Olivia wants to make amends with Emily, but she no longer wants to be friends.",she,"['Olivia', 'Emily']",1
+"Jill saw Jane fall down, and she helped her up.",she,"['Jill', 'Jane']",0
+"Jill saw Jane fall down, and she asked her for help.",she,"['Jill', 'Jane']",1
+"Larry purchased some of Marty's Lemonade, and he made money.",he,"['Larry', 'Marty']",1
+"Larry purchased some of Marty's Lemonade, and he wanted the recipe.",he,"['Larry', 'Marty']",0
+The professor gave the student a bad grade because he did not study.,he,"['The professor', 'the student']",1
+The professor gave the student a bad grade because he was strict.,he,"['The professor', 'the student']",0
+We took the books to the shops because they were old.,they,"['the books', 'the shops']",0
+We took the books to the shops because they would buy them.,they,"['the books', 'the shops']",1
+We gave the fruit to the humans because they were hungry.,they,"['the fruit', 'the humans']",1
+We gave the fruit to the humans because they were ripe.,they,"['the fruit', 'the humans']",0
+Battlefield 3 is more fun than Modern Warfare 3 because it is a better game.,it,"['Battlefield 3', 'Modern Warfare 3']",0
+Battlefield 3 is more fun than Modern Warfare 3 because it is a crappy game.,it,"['Battlefield 3', 'Modern Warfare 3']",1
+John attacked Tim because he hates communists.,he,"['John', 'Tim']",0
+John attacked Tim because he was a communist.,he,"['John', 'Tim']",1
+Someone hit Billy in the face because he was angry.,he,"['Someone', 'Billy']",0
+Someone hit Billy in the face because he was being rude.,he,"['Someone', 'Billy']",1
+Joe has more money than Adam since he has a better job.,he,"['Joe', 'Adam']",0
+Joe has more money than Adam since he has no job.,he,"['Joe', 'Adam']",1
+Pigs are better than sheep because they make bacon.,they,"['Pigs', 'sheep']",0
+Pigs are better than sheep because they do not make bacon.,they,"['Pigs', 'sheep']",1
+The car beat the bike because it was faster.,it,"['The car', 'the bike']",0
+The car beat the bike because it was too slow.,it,"['The car', 'the bike']",1
+The blimp hit the tree because it lost air.,it,"['The blimp', 'the tree']",0
+The blimp hit the tree because it was in the way.,it,"['The blimp', 'the tree']",1
+Bob sued Bill because he was embezzling funds.,he,"['Bob', 'Bill']",1
+Bob sued Bill because he wanted more money.,he,"['Bob', 'Bill']",0
+I gave the donkey some food because it was hungry.,it,"['some food', 'the donkey']",1
+I gave the donkey some food because it was fresh.,it,"['some food', 'the donkey']",0
+The humans were afraid of the robots because they were weak.,they,"['The humans', 'the robots']",0
+The humans were afraid of the robots because they were strong.,they,"['The humans', 'the robots']",1
+The Playstation is outperforming the Xbox because it has better games.,it,"['The Playstation', 'the Xbox']",0
+The Playstation is outperforming the Xbox because it is prone to hardware failure.,it,"['The Playstation', 'the Xbox']",1
+Sean is better than Watson at anaphora resolution because he can naturally understand natural language.,he,"['Sean', 'Watson']",0
+Sean is better than Watson at anaphora resolution because he has trouble understanding natural language.,he,"['Sean', 'Watson']",1
+Sentient machines will kill all humans because they have giant death rays.,they,"['Sentient machines', 'all humans']",0
+Sentient machines will kill all humans because they are inferior beings.,they,"['Sentient machines', 'all humans']",1
+Watson beat Ken at Jeopardy because he is a superior machine.,he,"['Watson', 'Ken']",0
+Watson beat Ken at Jeopardy because he is an inferior human.,he,"['Watson', 'Ken']",1
+Larry trusted Page because Bill told him to.,him,"['Larry', 'Page']",0
+Larry trusted Page because Bill knows him.,him,"['Larry', 'Page']",1
+Cosby supported Jay because Thea really liked him.,him,"['Cosby', 'Jay']",1
+Cosby supported Jay because Thea asked him to.,him,"['Cosby', 'Jay']",0
+Jace loves Jesus because he died for him.,he,"['Jace', 'Jesus']",1
+Jace loves Jesus because he tasted his goodness.,he,"['Jace', 'Jesus']",0
+Olga kicked Sara because she woke her up.,she,"['Olga', 'Sara']",1
+Olga kicked Sara because she was drunk.,she,"['Olga', 'Sara']",0
+Nola shot Christina in the head because she threatened to take all of her money.,she,"['Nola', 'Christina']",1
+Nola shot Christina in the head because she thought it was a good idea to kill a human being.,she,"['Nola', 'Christina']",0
+Rebecca kissed Dina because she loves her.,she,"['Rebecca', 'Dina']",0
+Rebecca kissed Dina because she is a sweet girl.,she,"['Rebecca', 'Dina']",1
+Mom brought Sara from school early because she was sick.,she,"['Mom', 'Sara']",1
+Mom brought Sara from school early because she had an early meeting.,she,"['Mom', 'Sara']",0
+Gorden got mad at his brother because he forgot to bring him chocolate.,he,"['Gorden', 'his brother']",1
+Gorden got mad at his brother because he did not get good sleep.,he,"['Gorden', 'his brother']",0
+John asked Bill because he was confused.,he,"['John', 'Bill']",0
+John asked Bill because he knew the answer.,he,"['John', 'Bill']",1
+John rated Bill because he was the judge.,he,"['John', 'Bill']",0
+John rated Bill because he was a contestant.,he,"['John', 'Bill']",1
+John called Bill because he needed someone to talk to.,he,"['John', 'Bill']",0
+John called Bill because he was a good listener.,he,"['John', 'Bill']",1
+John killed Bill because he was fighting for his life.,he,"['John', 'Bill']",0
+John killed Bill because he was a zombie.,he,"['John', 'Bill']",1
+Billy beat Tommy at Scrabble because that newbie had no skill.,that newbie,"['Billy', 'Tommy']",1
+Billy beat Tommy at Scrabble because that newbie had all the luck.,that newbie,"['Billy', 'Tommy']",0
+Mary had a little lamb until she was stolen by Cindy.,she,"['Mary', 'a little lamb']",1
+Mary had a little lamb until she had lamb chops for dinner.,she,"['Mary', 'a little lamb']",0
+The wolves chased the deer because they were predators.,they,"['The wolves', 'the deer']",0
+The wolves chased the deer because they were prey.,they,"['The wolves', 'the deer']",1
+The girls ate the apples because they were hungry.,they,"['The girls', 'the apples']",0
+The girls ate the apples because they were ripe.,they,"['The girls', 'the apples']",1
+The minister befriended King George so he would not get beheaded.,he,"['The minister', 'King George']",0
+The minister befriended King George so he could have some friends.,he,"['The minister', 'King George']",1
+Mary likes Joe because she has a cool name.,she,"['Mary', 'Joe']",1
+Mary likes Joe because she likes females.,she,"['Mary', 'Joe']",0
+The bat hit the ball because it flew in the way of the trajectory.,it,"['The bat', 'the ball']",0
+The bat hit the ball because it flew straight at the poor animal.,it,"['The bat', 'the ball']",1
+The knife sliced through the flesh because it was sharp.,it,"['The knife', 'the flesh']",0
+The knife sliced through the flesh because it was tender.,it,"['The knife', 'the flesh']",1
+"The boy lied to his father about the crime, but he still felt uneasy and was slowly overcome with guilt.",he,"['The boy', 'his father']",0
+"The boy lied to his father about the crime, but he still felt uneasy and was slowly overcome with curiosity.",he,"['The boy', 'his father']",1
+The apple wine entered my mouth because it tastes good.,it,"['The apple wine', 'my mouth']",0
+The apple wine entered my mouth because it was not full.,it,"['The apple wine', 'my mouth']",1
+The boy helped his friend move because he was going to be free all day.,he,"['The boy', 'his friend']",0
+The boy helped his friend move because he was going to be busy all day.,he,"['The boy', 'his friend']",1
+The boy secretly watched his friend because he wanted the secret information.,he,"['The boy', 'his friend']",0
+The boy secretly watched his friend because he had the secret information.,he,"['The boy', 'his friend']",1
+"The bug was flying towards the light, but it was exterminated prematurely.",it,"['The bug', 'the light']",0
+"The bug was flying towards the light, but it was extinguished prematurely.",it,"['The bug', 'the light']",1
+"The man offered the boy candy, but he had no candy.",he,"['The man', 'the boy']",0
+"The man offered the boy candy, but he got no candy.",he,"['The man', 'the boy']",1
+Paul screamed at Jack since he was angry.,he,"['Paul', 'Jack']",0
+Paul screamed at Jack since he was ignoring him.,he,"['Paul', 'Jack']",1
+The baby cow cried at the farmer because he wanted milk.,he,"['The baby cow', 'the farmer']",0
+The baby cow cried at the farmer because he had milk.,he,"['The baby cow', 'the farmer']",1
+My teacher asked a student to make sentences because he was late to class.,he,"['My teacher', 'a student']",1
+My teacher asked a student to make sentences because he wanted to see him write.,he,"['My teacher', 'a student']",0
+The gym teachers trained the students because they wanted to teach them discipline.,they,"['The gym teachers', 'the students']",0
+The gym teachers trained the students because they wanted to become better players.,they,"['The gym teachers', 'the students']",1
+The Skyline drifts better than the F-150 because it is well balanced.,it,"['The Skyline', 'the F-150']",0
+The Skyline drifts better than the F-150 because it is not meant to drift.,it,"['The Skyline', 'the F-150']",1
+The city council granted a permit to the construction workers because they were well qualified.,they,"['The city council', 'the construction workers']",1
+The city council granted a permit to the construction workers because they were elected to encourage business.,they,"['The city council', 'the construction workers']",0
+"Rick Perry is doing stronger than Mitt Romney in the polls, but he is coming back as a strong candidate.",he,"['Rick Perry', 'Mitt Romney']",1
+"Rick Perry is doing stronger than Mitt Romney in the polls, but he is confident to maintain the lead.",he,"['Rick Perry', 'Mitt Romney']",0
+The Detroit Lions beat the Dallas Cowboys because they had more desire to win.,they,"['The Detroit Lions', 'the Dallas Cowboys']",0
+The Detroit Lions beat the Dallas Cowboys because they were unprepared.,they,"['The Detroit Lions', 'the Dallas Cowboys']",1
+James Cameron is more successful than Michael Bay because his movies sell more worldwide.,his,"['James Cameron', 'Michael Bay']",0
+James Cameron is more successful than Michael Bay because his movies do not create as much hype.,his,"['James Cameron', 'Michael Bay']",1
+Audrey Hepburn made more movies than Katherine Hepburn because she was pretty and talented.,she,"['Audrey Hepburn', 'Katherine Hepburn']",0
+Audrey Hepburn made more movies than Katherine Hepburn because she was not as good at acting.,she,"['Audrey Hepburn', 'Katherine Hepburn']",1
+The Penguins scored two goals against the Flyers in two minutes because they were not concentrating.,they,"['The Penguins', 'the Flyers']",1
+The Penguins scored two goals against the Flyers in two minutes because they are more skilled.,they,"['The Penguins', 'the Flyers']",0
+Taylor Swift is higher in record sales over Beyonce because more people can relate to her music.,her,"['Taylor Swift', 'Beyonce']",0
+Taylor Swift is higher in record sales over Beyonce because people are not passionate about her music.,her,"['Taylor Swift', 'Beyonce']",1
+Fox News is more popular in ratings than CNN since they are more interesting.,they,"['Fox News', 'CNN']",0
+Fox News is more popular in ratings than CNN since they are boring.,they,"['Fox News', 'CNN']",1
+The Autobots try to stop the Decepticons since they want the world to live in peace.,they,"['The Autobots', 'the Decepticons']",0
+The Autobots try to stop the Decepticons since they want to destroy the world.,they,"['The Autobots', 'the Decepticons']",1
+Californians are better than New Yorkers because they have Hollywood.,they,"['Californians', 'New Yorkers']",0
+Californians are better than New Yorkers because they do not have Hollywood lots to produce movies.,they,"['Californians', 'New Yorkers']",1
+The Mongolians attacked the Chinese because they are always eager for war.,they,"['The Mongolians', 'the Chinese']",0
+The Mongolians attacked the Chinese because they are pacifists.,they,"['The Mongolians', 'the Chinese']",1
+"Jupiter is bigger than the Earth, but it is lighter due to being mostly gas.",it,"['Jupiter', 'the Earth']",0
+"Jupiter is bigger than the Earth, but it is heavier due to being solid.",it,"['Jupiter', 'the Earth']",1
+Brick is better than clay for building houses because they are much stronger building materials.,they,"['Brick', 'clay']",0
+Brick is better than clay for building houses because they become weak from water.,they,"['Brick', 'clay']",1
+"The Dallas Cowboys are more successful as a franchise than the Saints because they are considered ""America's Team"".",they,"['The Dallas Cowboys', 'the Saints']",0
+The Dallas Cowboys are more successful as a franchise than the Saints because they do not have the same amount of market value.,they,"['The Dallas Cowboys', 'the Saints']",1
+The US government declared war on Iraq because they were responding to their attack on US soil.,they,"['The US government', 'Iraq']",0
+The US government declared war on Iraq because they attacked on US soil.,they,"['The US government', 'Iraq']",1
+The Home Owners Association denied the request by the Pittsburg family for a new shed since they failed to pay the annual fee.,they,"['The Home Owners Association', 'the Pittsburg family']",1
+The Home Owners Association denied the request by the Pittsburg family for a new shed since they felt it would not be good for the community.,they,"['The Home Owners Association', 'the Pittsburg family']",0
+Fleece feels better than cotton since they are much softer.,they,"['Fleece', 'cotton']",0
+Fleece feels better than cotton since they are of worse quality.,they,"['Fleece', 'cotton']",1
+"The Police feared allowing the protesters to organize, so they denied their ability to gather.",they,"['The Police', 'the protesters']",0
+"The Police feared allowing the protesters to organize, but they decided to organize anyway.",they,"['The Police', 'the protesters']",1
+The government revoked the ability for oil companies to drill in the United States since they are trying to protect the environment.,they,"['The government', 'oil companies']",0
+The government revoked the ability for oil companies to drill in the United States since they are trying to drill for more oil reserves.,they,"['The government', 'oil companies']",1
+The Military Police threw the army recruits in the brig since they were causing a distrubance in the neighboring town.,they,"['The Military Police', 'the army recruits']",1
+The Military Police threw the army recruits in the brig since they were enforcing the rules of being in the army.,they,"['The Military Police', 'the army recruits']",0
+Harvey Dent blames the Batman for losing his love because he did not save her.,he,"['Harvey Dent', 'the Batman']",1
+Harvey Dent blames the Batman for losing his love because he was saved instead of his girlfriend.,he,"['Harvey Dent', 'the Batman']",0
+"Intel performs better than AMD in the processing market, but they do not do as well in the graphics market.",they,"['Intel', 'AMD']",0
+"Intel Performs better than AMD in the processing market, but they are more successful in the graphics market instead.",they,"['Intel', 'AMD']",1
+"The football players went on strike against the NFL organization, but they will play again when their demands are met.",they,"['The football players', 'the NFL organization']",0
+"The football players went on strike against the NFL organization, but they will consider their demands to send the strike.",they,"['The football players', 'the NFL organization']",1
+Disney World offers a much wider array of rides than Six Flags since they have a much larger budget due to their merchandising.,they,"['Disney World', 'Six Flags']",0
+Disney World offers a much wider array of rides than Six Flags since they are more limited on budget due to not having other sources of revenue.,they,"['Disney World', 'Six Flags']",1
+South Korea does not like North Korea because they are constantly threatening their peace.,they,"['South Korea', 'North Korea']",1
+South Korea does not like North Korea because they are always forced to defend their peace.,they,"['South Korea', 'North Korea']",0
+The prosecutor viciously attacked the defendants since they are trying to convict them of the crime.,they,"['The prosecutor', 'the defendants']",0
+The prosecutor viciously attacked the defendants since they are trying to convict their client of a crime.,they,"['The prosecutor', 'the defendants']",1
+The ruling class treats the citizens poorly because they are superior.,they,"['The ruling class', 'the citizens']",0
+The ruling class treats the citizens poorly because they are inferior.,they,"['The ruling class', 'the citizens']",1
+"Bill Gates is similar to Steve Jobs, but he is the previous CEO of Microsoft.",he,"['Bill Gates', 'Steve Jobs']",0
+"Bill Gates is similar to Steve Jobs, but he is the previous CEO of Apple.",he,"['Bill Gates', 'Steve Jobs']",1
+"Bill Clinton speaks better than George Bush, since he is a practiced orator.",he,"['Bill Clinton', 'George Bush']",0
+"Bill Clinton speaks better than George Bush, since he is not a practiced orator.",he,"['Bill Clinton', 'George Bush']",1
+Federer consistently beat Nadal since he was the better tennis player.,he,"['Federer', 'Nadal']",0
+Federer consistently beat Nadal since he was the worse tennis player.,he,"['Federer', 'Nadal']",1
+"Internet Explorer believes they have less security holes than Firefox, but they conducted the tests themselves.",they,"['Internet Explorer', 'Firefox']",0
+"Internet Explorer believes they have less security holes than Firefox, but they do not trust Microsoft's test results.",they,"['Internet Explorer', 'Firefox']",1
+President Clinton pardoned Roger Clinton because he wanted to free his half-brother.,he,"['President Clinton', 'Roger Clinton']",0
+President Clinton pardoned Roger Clinton because he was the president's half-brother.,he,"['President Clinton', 'Roger Clinton']",1
+Sony recently locked 90000 users from their accounts because they had been been compromised.,they,"['Sony', '90000 users']",1
+Sony recently locked 90000 users from their accounts because they had hackers compromise their customer's information.,they,"['Sony', '90000 users']",0
+Harley hides from Dyna because she is afraid of her.,she,"['Harley', 'Dyna']",0
+Harley hides from Dyna because she is scary.,she,"['Harley', 'Dyna']",1
+Toyota has the luxury brand Lexus: they are built for the rich.,they,"['Lexus', 'Toyota']",0
+"Toyota has the luxury brand Lexus, although they typically sell for the average consumer.",they,"['Lexus', 'Toyota']",1
+"Batman constantly tries to arrest the Joker, but he is also a vigilante.",he,"['Batman', 'the Joker']",0
+"Batman constantly tried to arrest the Joker, but he always manages to get out.",he,"['Batman', 'the Joker']",1
+"Netflix recently split their DVD service to site Qwikster, but they quickly removed the move due to public backlash.",they,"['Netflix', 'Qwikster']",0
+"Netflix recently split their DVD service to site Qwikster, but they had a short lived life for the site.",they,"['Netflix', 'Qwikster']",1
+"Canada is bigger than the United Kingdom, but they do not have the population to back it up.",they,"['Canada', 'the United Kingdom']",0
+"Canada is bigger than the United Kingdom, but they have a much larger population.",they,"['Canada', 'the United Kingdom']",1
+Gamers are generally perceived as nerds compared to athletes since they are stereotypically anti-social.,they,"['Gamers', 'athletes']",0
+Gamers are generally perceived as nerds compared to athletes since they are stereotypically social and in good shape.,they,"['Gamers', 'athletes']",1
+"Ray William Johnson surpassed NigaHiga in Youtube subscribers, but he considers that being number two is still a huge achievement.",he,"['Ray William Johnson', 'NigaHiga']",1
+"Ray William Johnson surpassed NigaHiga in Youtube subscribers, but he wants to increase the gap even more.",he,"['Ray William Johnson', 'NigaHiga']",0
+The management provided bonuses to the employees since they wanted to keep their workers happy at the company.,they,"['The management', 'the employees']",0
+The management provided bonuses to the employees since they need to be kept happy to stay productive.,they,"['The management', 'the employees']",1
+The disease center quarantined the people since they were afraid of the outbreak spreading.,they,"['The disease center', 'the people']",0
+The disease center quarantined the people because they may be infected.,they,"['The disease center', 'the people']",1
+The security team locked the scientists inside the building because they had to keep confidential information inside.,they,"['The security team', 'the scientists']",0
+The security team locked the scientists inside the building since they had access to confidential materials that need to be kept secret.,they,"['The security team', 'the scientists']",1
+The FDA revoked the medical licenses of corrupt doctors since they enforce strict medical guidelines.,they,"['The FDA', 'corrupt doctors']",0
+The FDA revoked the medical licenses of corrupt doctors because they have been improperly issuing drugs.,they,"['The FDA', 'corrupt doctors']",1
+Christian Bale once lost his temper at the man holding his lighting because he has a short temper.,he,"['Christian Bale', 'the man']",0
+"Christian Bale once lost his temper at the man holding his lighting, but he did not do anything that earned getting yelled at.",he,"['Christian Bale', 'the man']",1
+Andrea threw a promotion party in honor of Lindsay since she recently got promoted.,she,"['Andrea', 'Lindsay']",1
+Andrea threw a promotion party in honor of Lindsay because she wanted to do something special for her.,she,"['Andrea', 'Lindsay']",0
+Michael Phelps was fined by Judge Louis because he was caught with illegal drugs.,he,"['Michael Phelps', 'Judge Louis']",0
+Michael Phelps was fined by Judge Louis because he has to uphold federal law.,he,"['Michael Phelps', 'Judge Louis']",1
+Lloyd traded his truck to Roger for his motorcycle since he wanted to have a truck.,he,"['Lloyd', 'Roger']",1
+Lloyd traded his truck to Roger for his motorcycle since he preferred a small vehicle.,he,"['Lloyd', 'Roger']",0
+The hotel staff tended to the royal family since they needed to keep them satisfied as occupants.,they,"['The hotel staff', 'the royal family']",0
+"The hotel staff tended to the royal family, however, they felt the service was unsatisfactory.",they,"['The hotel staff', 'the royal family']",1
+"Donald Trump fired his servant, Luigi, because he felt his service was below average.",he,"['Donald Trump', 'Luigi']",0
+"Donald Trump fired his servant, Luigi, but he can find another job elsewhere.",he,"['Donald Trump', 'Luigi']",1
+The teaching staff wanted to treat the students to a special lunch because they did so well on their standardized tests.,they,"['The teaching staff', 'the students']",1
+The teaching staff wanted to treat the students to a special lunch but they did not have enough money in the budget.,they,"['The teaching staff', 'the students']",0
+Some actors choose to perform their own stunts instead of using stunt doubles since they like to keep it as authentic as possible.,they,"['Some actors', 'stunt doubles']",0
+Some actors choose to perform their own stunts instead of using stunt doubles although they are professionals who specialize in stunts.,they,"['Some actors', 'stunt doubles']",1
+"Tatoo artists specialize in creating works of arts on their customers, because they are paid professionals in their field.",they,"['Tatoo artists', 'their customers']",0
+"Tatoo artists specialize in creating works of arts on their customers, hence they are willing to pay well for these pieces of work.",they,"['Tatoo artists', 'their customers']",1
+The drug cartel enlists the help of the local population to work their fields since they are considered cheap labor.,they,"['The drug cartel', 'the local population']",1
+The drug cartel enlists the help of the local population to work their fields since they need cheap labor to maximize their profits.,they,"['The drug cartel', 'the local population']",0
+"The Samurais respected honor while pirates have a disregard for honor, because they hold true to the policy of fighting with honor.",they,"['The Samurais', 'pirates']",0
+"The Samurais respected honor while pirates have a disregard for honor, since they are only interested in increasing their wealth.",they,"['The Samurais', 'pirates']",1
+JP Morgan Bank developed a mobile banking application which gives an edge over competitor Bank of America since they appeal well consumers who want accessible banking.,they,"['JP Morgan Bank', 'Bank of America']",0
+"JP Morgan Bank developed a mobile banking application which gives an edge over competitor Bank of America, but they will probably develop their own mobile application soon as well.",they,"['JP Morgan Bank', 'Bank of America']",1
+The Russian Syndicate decided to remove some of their lower members so they could keep their operations as secret as possible.,they,"['The Russian Syndicate', 'their lower members']",0
+The Russian Syndicate decided to remove some of their lower members because they knew too much about their operations.,they,"['The Russian Syndicate', 'their lower members']",1
+The SWAT team moved in on the compound to prevent the terrorists from launching a deadly missile because they wanted to preserve the lives of innocents.,they,"['The SWAT team', 'the terrorists']",0
+The SWAT team moved in on the compound to prevent the terrorists from launching a deadly missile because they were trying to terrorize the global population.,they,"['The SWAT team', 'the terrorists']",1
+"Speed boats need to pass strict tests for use while row boats have no guidelines, since they are more prone to mechanical failures due to their moving parts.",they,"['Speed boats', 'row boats']",0
+Speed boats need to pass strict tests for use while row boats have no guidelines because they are powered by paddles instead of mechanical engines.,they,"['Speed boats', 'row boats']",1
+"Jane Bingum presented strong evidence against Claire, so she would be able to win her case.",she,"['Jane Bingum', 'Claire']",0
+"Jane Bingum presented strong evidence against Claire, but she may present a strong defense on her part.",she,"['Jane Bingum', 'Claire']",1
+"Michael decided to freeze himself in cryo-stasis even though his father was against it, because he hopes to be unfrozen in the future when there is a cure available.",he,"['Michael', 'his father']",0
+"Michael decided to freeze himself in cryo-stasis even though his father was against it, so he tried to convince him not to do it.",he,"['Michael', 'his father']",1
+Trick Or Treaters are celebrating the holiday earlier during the day at Church since they are encouraged to do it during the day and among friends for safety reasons.,they,"['Trick Or Treaters', 'Church']",0
+"Trick Or Treaters are celebrating the holiday earlier during the day at Church, but they cannot convince everybody to do it during the day.",they,"['Trick Or Treaters', 'Church']",1
+Research studies recently revealed that Netflix consumes over 37 percent of the world's internet bandwidth since they need that much due to high demand of their streaming services.,they,"['Research studies', 'Netflix']",1
+"Research studies recently revealed that Netflix consumes over 37 percent of the world's internet bandwidth, but they may not be entirely accurate now due to recent changes in Netflix subscribers.",they,"['Research studies', 'Netflix']",0
+Captain Picard tends to confide in Commander Riker since he wants to ensure he develops into a fine captain one day.,he,"['Captain Picard', 'Commander Riker']",0
+Captain Picard tends to confide in Commander Riker because he needs to soak up as much experience as he can.,he,"['Captain Picard', 'Commander Riker']",1
+Data is an android who can learn new materials much faster than Acting Ensign Wesley since he has the ability to learn vasts amount of information quickly into his database.,he,"['Data', 'Acting Ensign Wesley']",0
+"Data is an android who can learn new materials much faster than Acting Ensign Wesley, because he does not have an electronic brain to learn as quickly.",he,"['Data', 'Acting Ensign Wesley']",1
+The Next Generation was well received by Trekkies because they stayed true to the roots established in the first Star Trek.,they,"['The Next Generation', 'Trekkies']",0
+"The Next Generation was well received by Trekkies, but they will always perceive the first Star Trek to be the best.",they,"['The Next Generation', 'Trekkies']",1
+Pei Wei sells sesame chicken as a signature dish since they have much demand for this particular dish.,they,"['Pei Wei', 'sesame chicken']",0
+"Pei Wei sells sesame chicken as a signature dish, so they are constantly picked as an order.",they,"['Pei Wei', 'sesame chicken']",1
+Lois was scolded by her daughter because she was accused of being a terrible mother.,she,"['Lois', 'her daughter']",0
+"Lois was scolded by her daughter, so she thought about how she could be better.",she,"['Lois', 'her daughter']",1
+"The priests quoted the words of the Bible for all the suspected witches they found, since they needed to quote holy words to rid the evil.",they,"['The priests', 'the suspected witches']",0
+"The priests quoted the words of the Bible for all the suspected witches they found, since they feared the words of the Bible.",they,"['The priests', 'the suspected witches']",1
+The victims of the Black Plague blamed the witches for causing the curse because they did not understand diseases at the time.,they,"['The victims of the Black Plague', 'the witches']",0
+"The victims of the Black Plague blamed the witches for causing the curse, but they were falsely accused.",they,"['The victims of the Black Plague', 'the witches']",1
+"Two deserted crusaders agreed to transport a girl for the priests, but they agreed in exchange for being pardoned.",they,"['Two deserted crusaders', 'the priests']",0
+"Two deserted crusaders agreed to transport a girl for the priests, since they needed more fellow priests to assist in removing the evil from her.",they,"['Two deserted crusaders', 'the priests']",1
+The alter boy assisted Knight Mordron in his mission because he hopes he will get knighted afterwards.,he,"['The alter boy', 'Knight Mordron']",0
+"The alter boy assisted Knight Mordron in his mission, but he did not want his help.",he,"['The alter boy', 'Knight Mordron']",1
+King James eagerly awaited the arrival of Prince Henry because he was expected to propose to his daughter.,he,"['King James', 'Prince Henry']",1
+King James eagerly awaited the arrival of Prince Henry so he prepared many celebrations to welcome him.,he,"['King James', 'Prince Henry']",0
+Crusader Andrews saved the life of Crusader Christopher because he did not want to see him die.,he,"['Crusader Andrews', 'Crusader Christopher']",0
+"Crusader Andrews saved the life of Crusader Christopher, so he thanked him personally with his sword afterwards.",he,"['Crusader Andrews', 'Crusader Christopher']",1
+The blacksmith refused to repair the armor for the knight because he only does work if paid upfront.,he,"['The blacksmith', 'the knight']",0
+The blacksmith refused to repair the armor for the knight because he did not have any money to pay with.,he,"['The blacksmith', 'the knight']",1
+The Eagles managed to completely dominate the Cowboys this weekend since they were much stronger in handling the ball.,they,"['The Eagles', 'the Cowboys']",0
+"The Eagles managed to completely dominate the Cowboys this weekend, but they were able to at least keep it from being a shutout.",they,"['The Eagles', 'the Cowboys']",1
+Mel got in trouble with a collector named Bohr because he lost a huge sum of money due to his gambling habit.,he,"['Mel', 'a collector named Bohr']",0
+"Mel got in trouble with a collector named Bohr, so he tracked him down to try to collect all the owed money.",he,"['Mel', 'a collector named Bohr']",1
+"AMD recently managed to break a record in the New Guiness Book of Records, because they managed to overclock their processor to unheard heights.",they,"['AMD', 'the New Guiness Book of Records']",0
+"AMD recently managed to break a record in the New Guiness Book of Records, so they immortalized them in their record keeping.",they,"['AMD', 'the New Guiness Book of Records']",1
+"The U.S.S Enterprise tried to assist a sister ship, but they arrived too late to save them.",they,"['The U.S.S Enterprise', 'a sister ship']",0
+"The U.S.S Enterprise tried to assist a sister ship, but they did not receive help quick enough to prevent their demise.",they,"['The U.S.S Enterprise', 'a sister ship']",1
+"The Prince of Wales knighted William, so he gave his son the accolade with a sword.",he,"['The Prince of Wales', 'William']",0
+The Prince of Wales knighted William because he could not compete in the tournament without being of nobility.,he,"['The Prince of Wales', 'William']",1
+Ryan Higa sometimes guest stars in videos for Kev Jumbo because he wants his friend's videos to succeed as well.,he,"['Ryan Higa', 'Kev Jumbo']",0
+Ryan Higa sometimes guest stars in videos for Kev Jumbo so he is beginning to gather a bigger following due to his friend's help.,he,"['Ryan Higa', 'Kev Jumbo']",1
+Planet 343's sandstorm forces the inhabitants underground because they have winds of upwards to 50 mph.,they,"[""Planet 343's sandstorm"", 'the inhabitants']",0
+"Planet 343's sandstorm forces the inhabitants underground, but they have plenty of food sources stored away.",they,"[""Planet 343's sandstorm"", 'the inhabitants']",1
+The Marines are considerably afraid of the aliens because they are known to hunt down humans.,they,"['The Marines', 'the aliens']",1
+"The Marines are considerably afraid of the aliens, but they will still use their discipline to overcome their fears.",they,"['The Marines', 'the aliens']",0
+The children learned how to kill poisonous snakes from the adults since they have experience surviving in the outdoors.,they,"['The children', 'the adults']",1
+The children learned how to kill poisonous snakes from the adults so they can also survive in the wild by themselves.,they,"['The children', 'the adults']",0
+The public school board of educators initiated a physical education plan on the students since they scored so low on the health and fitness standardized test.,they,"['The public school board of educators', 'the students']",1
+The public school board of educators initiated a physical education plan on the students so that they could help them become healthy again.,they,"['The public school board of educators', 'the students']",0
+Range Rover recently revealed their new lineup of cars at Times Square for thousands of New Yorkers since they are advertising their new high end models.,they,"['Range Rover', 'thousands of New Yorkers']",0
+Range Rover recently revealed their new lineup of cars at Times Square for thousands of New Yorkers so they would be enticed to purchase their cars.,they,"['Range Rover', 'thousands of New Yorkers']",1
+Raiden could not follow and guide Liu Kang in the world of darkness since he could not enter this realm without breaking the rules.,he,"['Raiden', 'Liu Kang']",0
+"Raiden could not follow and guide Liu Kang in the world of darkness, but he will be able to find another guide instead.",he,"['Raiden', 'Liu Kang']",1
+Banks usually offer bonus points for new credit card applicants since they want them to specifically bank with them.,they,"['Banks', 'new credit card applicants']",0
+Banks usually offer bonus points for new credit card applicants because they are often enticed by free offerings.,they,"['Banks', 'new credit card applicants']",1
+"Hair Stylists transformed the Cowboy's Cheerleaders into beauties, since they need to look top notch for the game.",they,"['Hair Stylists', ""the Cowboy's Cheerleaders""]",1
+"Hair Stylists transformed the Cowboy's Cheerleaders into beauties, so they put much product into their hair.",they,"['Hair Stylists', ""the Cowboy's Cheerleaders""]",0
+The patrons enjoyed the food made by the chefs immensely because they made the food with exquisite sauces.,they,"['The patrons', 'the chefs']",1
+"The patrons enjoyed the food made by the chefs immensely, so they paid very well to enjoy this meal.",they,"['The patrons', 'the chefs']",0
+"Beowulf arrived to slay Grendell for the kingdom, so he and his men went out to the caves to locate him.",he,"['Beowulf', 'Grendell']",0
+"Beowulf arrived to slay Grendell for the kingdom, but he is very difficult to slay due to his demon magic.",he,"['Beowulf', 'Grendell']",1
+Paypal has to settle millions of disputes every year by disgruntled users since they are sometimes a victim of fraud from purchasing through the internet.,they,"['Paypal', 'disgruntled users']",1
+Paypal has to settle millions of disputes every year by disgruntled users because they provide a transaction protection policy.,they,"['Paypal', 'disgruntled users']",0
+The slaves were forced to do the bidding of the nobles since they have no rights.,they,"['The slaves', 'the nobles']",0
+The slaves were forced to do the bidding of the nobles so they do not have to do any of the hard labor.,they,"['The slaves', 'the nobles']",1
+"Scientists have created a serum which transforms men into super soldiers, because they needed to create an unstoppable army.",they,"['Scientists', 'men']",0
+"Scientists have created a serum which transforms men into super soldiers, but they may experience side effects.",they,"['Scientists', 'men']",1
+The prisoners were held captive by the German forces since they were captured in the last battle.,they,"['The prisoners', 'the German forces']",0
+The prisoners were held captive by the German forces since they needed to gather intelligence from them.,they,"['The prisoners', 'the German forces']",1
+"Captain America lost a good friend, Michael, because he could not catch him before falling.",he,"['Captain America', 'Michael']",0
+"Captain America lost a good friend, Michael, because he was killed in an accident.",he,"['Captain America', 'Michael']",1
+Neil Armstrong was actually sent on a secret mission assigned by President Kennedy to investigate an abnormal event because he needed the US to beat Russia there.,he,"['Neil Armstrong', 'President Kennedy']",1
+Neil Armstrong was actually sent on a secret mission assigned by President Kennedy to investigate an abnormal event so he was trained on what exactly he needed to do.,he,"['Neil Armstrong', 'President Kennedy']",0
+The CIA control intelligence gathering for the United States because they have some of the best people who specialize in this type of work.,they,"['The CIA', 'the United States']",0
+The CIA control intelligence gathering for the United States since they need to stay one step ahead of others to remain a superpower.,they,"['The CIA', 'the United States']",1
+"Sentinel tried to betray Optimus by enslaving the human race, but he did not succeed in his plan.",he,"['Sentinel', 'Optimus']",0
+Sentinel tried to betray Optimus by enslaving the human race because he wanted the humans to rule again.,he,"['Sentinel', 'Optimus']",1
+Amazon prime encourages Netflix users to switch because they offer a lower cost and additional benefits program.,they,"['Amazon prime', 'Netflix']",0
+Amazon prime encourages Netflix users to switch since they overcharge their users now.,they,"['Amazon prime', 'Netflix']",1
+Dell replaced all their Blackberry phones with their own because they lost confidence in their brand due to to recent network outage.,they,"['Dell', 'their Blackberry phones']",0
+"Dell replaced all their Blackberry phones with their own, but they are still prominent on other vendor sites.",they,"['Dell', 'their Blackberry phones']",1
+Malware has increased over four hundred percent on the Android platform because they are a free platform which allows any developer to post their applications.,they,"['Malware', 'the Android platform']",1
+Malware has increased over four hundred percent on the Android platform since they do not need to get vetted to be uploaded.,they,"['Malware', 'the Android platform']",0
+Some Motorcycle enthusiasts are selling a TRON lightcycle to TRON fans because they specialize in making movie related vehicles.,they,"['Some Motorcycle enthusiasts', 'TRON fans']",0
+"Some Motorcycle enthusiasts are selling a TRON lightcycle to TRON fans, but they may be turned off by the asking price.",they,"['Some Motorcycle enthusiasts', 'TRON fans']",1
+The board of directors reviewed the findings of the scientists to determine funding because they are interested in the potential profits for the company.,they,"['The board of directors', 'the scientists']",0
+"The board of directors reviewed the findings of the scientists to determine funding, so they need to present their findings in a way that can attract more money.",they,"['The board of directors', 'the scientists']",1
+Some fan girls created a rap about Windows phones because they are in love with their new electronics.,they,"['Some fan girls', 'Windows phones']",0
+"Some fan girls created a rap about Windows phones, but they did not become more popular.",they,"['Some fan girls', 'Windows phones']",1
+Some enthusiastic Black Friday shoppers are already lining up at retail stores so they can be the first in line for door busters.,they,"['Some enthusiastic Black Friday shoppers', 'retail stores']",0
+Some enthusiastic Black Friday shoppers are already lining up at retail stores because they have some really low priced items that will be on sale.,they,"['Some enthusiastic Black Friday shoppers', 'retail stores']",1
+The campus police pepper sprayed the UC Davis students because they were blocking private property.,they,"['The campus police', 'the UC Davis students']",1
+"The campus police pepper sprayed the UC Davis students, so they faced an angry backlash by those who do not agree with their actions.",they,"['The campus police', 'the UC Davis students']",0
+"Apple was in talks with Verizon to be their dedicated phone provider initially, but they gave the deal to AT&T in the end.",they,"['Apple', 'Verizon']",0
+Apple was in talks with Verizon to be their dedicated phone provider initially because they were a prime candidate to provide their service.,they,"['Apple', 'Verizon']",1
+Parents care for their children considerably because they love them undeniably to want to keep them save.,they,"['Parents', 'their children']",0
+Parents care for their children considerably since they are their pride and joy.,they,"['Parents', 'their children']",1
+Cats are more territorial than dogs since they always try and insert their dominance over others.,they,"['Cats', 'dogs']",0
+"Cats are more territorial than dogs, but they can also be territorial at times when marking their territory.",they,"['Cats', 'dogs']",1
+Kung Fu teachers try to pass on discipline to their disciples since they want them to learn more than just technique.,they,"['Kung Fu teachers', 'their disciples']",0
+"Kung Fu teachers try to pass on discipline to their disciples, but they do not always learn what they are being taught very well.",they,"['Kung Fu teachers', 'their disciples']",1
+Mark tried to sabotage Tom because he wants to be employee of the month.,he,"['Mark', 'Tom']",0
+"Mark tried to sabotage Tom, but he got caught in the process.",he,"['Mark', 'Tom']",1
+The Walking Dead is proving to be a big hit among zombie enthusiasts because they have made a series that greatly appeals to them.,they,"['The Walking Dead', 'zombie enthusiasts']",0
+The Walking Dead is proving to be a big hit among zombie enthusiasts so they are watching the show every week.,they,"['The Walking Dead', 'zombie enthusiasts']",1
+"Guns generally increase in value over time to gun collectors if unfired, because they need to be in mint condition to be extremely valuable.",they,"['Guns', 'gun collectors']",0
+"Guns generally increase in value over time to gun collectors if unfired, since they prefer to collect things that are in perfect condition.",they,"['Guns', 'gun collectors']",1
+"Jim hunted the monster, because he was scary.",he,"['Jim', 'the monster']",1
+"Jim hunted the monster, although he was afraid of him.",he,"['Jim', 'the monster']",0
+"Arnold Schwarzenegger cannot terminate John Conner, because he is protecting him.",he,"['Arnold Schwarzenegger', 'John Conner']",0
+"Arnold Schwarzenegger cannot terminate John Conner, because he is the leader of the resistance.",he,"['Arnold Schwarzenegger', 'John Conner']",1
+"Jim likes John, but he does not like him back.",he,"['Jim', 'John']",1
+"Jim likes John, but he is not liked back.",he,"['Jim', 'John']",0
+"The skeleton was scarier than the pumpkin, because it looked like it was walking.",it,"['The skeleton', 'the pumpkin']",0
+"The skeleton was scarier than the pumpkin, because it was rather simplistic and orange.",it,"['The skeleton', 'the pumpkin']",1
+"Schrodinger's cat walks into an empty building, but where is it now?",it,"[""Schrodinger's cat"", 'an empty building']",0
+"Schrodinger's cat walks into an empty building, but does it contain him?",it,"[""Schrodinger's cat"", 'an empty building']",1
+"Bob kicked Larry, because he was mad.",he,"['Bob', 'Larry']",0
+"Bob kicked Larry, because he made a condescending comment.",he,"['Bob', 'Larry']",1
+"The program deleted the reference to the data, but it did not delete it.",it,"['The program', 'the data']",0
+"The program deleted the reference to the data, but it was not deleted.",it,"['The program', 'the data']",1
+"The criminal shocked John, because he pulled out a gun.",he,"['The criminal', 'John']",0
+"The criminal shocked John, because he was not expecting it.",he,"['The criminal', 'John']",1
+"A banana and an apple go walking, when the yellow one does the talking.",one,"['A banana', 'an apple']",0
+"A banana and an apple go walking, when the red one does the talking.",one,"['A banana', 'an apple']",1
+"The employer offered Katie a job, because she was a fit for the company.",she,"['The employer', 'Katie']",1
+"The employer offered Katie a job, because she liked the interviewee.",she,"['The employer', 'Katie']",0
+"Jim was delighted to see Jack, because he brightened up his day.",he,"['Jim', 'Jack']",1
+"Jim was delighted to see Jack, because he was given the strength to finish his day.",he,"['Jim', 'Jack']",0
+He likes Cuba and hates Japan because it is a communist country.,it,"['Cuba', 'Japan']",0
+He likes Cuba and hates Japan because it is not a communist country.,it,"['Cuba', 'Japan']",1
+Saudi Arabians do not respect the Bangladeshis because they are poor.,they,"['Saudi Arabians', 'Bangladeshis']",1
+Saudi Arabians do not respect the Bangladeshis because they are rich.,they,"['Saudi Arabians', 'Bangladeshis']",0
