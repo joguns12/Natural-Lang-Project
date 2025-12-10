@@ -45,38 +45,29 @@ def resolve_pronouns_with_details(nlp, sentence, pronoun, candidates):
     
     return resolved_text, resolved_candidate_idx
 
-def evaluate_accuracy(sample_size=35):
-    # Evaluate pronoun resolution accuracy on a sample from dpr_train.csv
+def evaluate_accuracy():
+    # Evaluate pronoun resolution accuracy on the entire dpr_train.csv
     nlp = load_model()
     
     print(f"\nLoading dataset...")
     df = pd.read_csv('dpr_train.csv')
-    # randomly sample sentences to test
-    sample = df.sample(n=sample_size, random_state=42)
+    sample = df  # use all rows
     
     correct = 0
     total = 0
     results = []
     
-    print(f"\nEvaluating on {len(sample)} sentences:\n")
-    print("=" * 100)
-    
+    print(f"\nEvaluating on {len(sample)} sentences...")
     for idx, (_, row) in enumerate(sample.iterrows(), 1):
         sentence = row["sentence"]
         pronoun = row["pronoun"]
         candidates = eval(row["candidates"])
         label = row["label"]
-        
-        # resolve the pronoun in the sentence
         resolved_text, resolved_idx = resolve_pronouns_with_details(nlp, sentence, pronoun, candidates)
-        
-        # check if resolution matches ground truth
         is_correct = resolved_idx == label
         if is_correct:
             correct += 1
         total += 1
-        
-        # store result for later export
         results.append({
             'sentence': sentence,
             'pronoun': pronoun,
@@ -86,15 +77,7 @@ def evaluate_accuracy(sample_size=35):
             'correct': is_correct,
             'resolved_text': resolved_text
         })
-        
-        # display result
-        status = "CORRECT" if is_correct else "WRONG"
-        print(f"\n[{idx}] {status}")
-        print(f"Sentence: {sentence}")
-        print(f"Pronoun: '{pronoun}' | Candidates: {candidates}")
-        print(f"Ground truth: {candidates[label] if label is not None else 'Unknown'}")
-        print(f"Resolved to: {candidates[resolved_idx] if resolved_idx is not None else 'Could not resolve'}")
-        print(f"Resolved text: {resolved_text}")
+    # ...existing code...
     
     print("\n" + "=" * 100)
     # calculate accuracy percentage
@@ -111,4 +94,4 @@ def evaluate_accuracy(sample_size=35):
     return accuracy, results_df
 
 if __name__ == "__main__":
-    evaluate_accuracy(sample_size=35)
+    evaluate_accuracy()
