@@ -9,6 +9,9 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from scipy.optimize import linear_sum_assignment
 import csv
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+from scipy.stats import gaussian_kde
 
 # Download NLTK data if needed
 try:
@@ -130,6 +133,17 @@ def topic_kl_matrix(model_left, dict_left, model_right, dict_right, num_topics=8
     return M
 
 def main():
+    # Visual style for professional charts
+    plt.style.use('seaborn-v0_8')
+    plt.rcParams.update({
+        'figure.dpi': 140,
+        'savefig.dpi': 200,
+        'axes.grid': True,
+        'grid.alpha': 0.25,
+        'axes.titlesize': 'large',
+        'axes.labelsize': 'medium',
+        'legend.frameon': False,
+    })
     # Configurable seeds for experimentation (used in baseline runs)
     baseline_seeds = [42, 43]  # adjust to experiment
     candidate_names = ["john", "mary", "bill", "bob", "jane", "jack", "jim", "joe", "susan", "jennifer"]
@@ -174,6 +188,19 @@ def main():
     resolved_freq = count_name_frequencies(resolved_documents, candidate_names)
     for name, count in resolved_freq.items():
         print(f"  {name}: {count}")
+    # Compute per-name uplift stats
+    uplift_rows = []
+    for name in candidate_names:
+        raw_c = raw_freq.get(name, 0)
+        res_c = resolved_freq.get(name, 0)
+        delta = res_c - raw_c
+        pct = (delta / raw_c * 100.0) if raw_c > 0 else (100.0 if res_c > 0 else 0.0)
+        uplift_rows.append((name, raw_c, res_c, delta, pct))
+    # Show top-3 names by percent increase
+    top_uplift = sorted(uplift_rows, key=lambda x: x[4], reverse=True)[:3]
+    print("\nTop-3 name uplifts (percent increase):")
+    for name, raw_c, res_c, delta, pct in top_uplift:
+        print(f"  {name}: raw={raw_c}, resolved={res_c}, delta={delta}, +{pct:.1f}%")
 
     print("\n" + "="*100)
     print("PART 3: LDA on PRONOUN-RESOLVED DOCUMENTS")
@@ -292,6 +319,13 @@ def main():
         f.write("="*100 + "\n")
         f.write("TOPIC MODELING COMPARISON: Raw vs. Pronoun-Resolved Documents\n")
         f.write("="*100 + "\n\n")
+        # Name uplift section
+        f.write("Name Uplift (Raw vs Pronoun-Resolved)\n")
+        f.write("-"*100 + "\n")
+        f.write("name, raw_count, resolved_count, delta, percent_increase\n")
+        for name, raw_c, res_c, delta, pct in uplift_rows:
+            f.write(f"{name}, {raw_c}, {res_c}, {delta}, {pct:.1f}%\n")
+        f.write("\n")
         for topic_id in range(8):
             raw_words = set(raw_topics[topic_id])
             resolved_words = set(resolved_topics[topic_id])
@@ -388,7 +422,123 @@ def main():
             w.writerow([r, c, v])
     print("Baseline two-run comparison appended to report.")
 
-print("\nAnalysis complete!\n")
+    # Append side-by-side summary comparing baseline vs raw-resolved KLs
+    try:
+        # Load CSVs
+        baseline_vals = []
+        with open('baseline_kl.csv', 'r', encoding='utf-8') as cf:
+            reader = csv.DictReader(cf)
+            for row in reader:
+                try:
+                    baseline_vals.append(float(row['KL']))
+                except Exception:
+                    pass
+        rr_vals = []
+        with open('raw_resolved_kl.csv', 'r', encoding='utf-8') as cf:
+            reader = csv.DictReader(cf)
+            for row in reader:
+                try:
+                    rr_vals.append(float(row['KL']))
+                except Exception:
+                    pass
+        def stats(vals):
+            if not vals:
+                return {'count': 0, 'mean': 0.0, 'median': 0.0, 'std': 0.0, 'min': 0.0, 'max': 0.0}
+            arr = np.array(vals, dtype=np.float64)
+            return {
+                'count': int(arr.size),
+                'mean': float(np.mean(arr)),
+                'median': float(np.median(arr)),
+                'std': float(np.std(arr, ddof=1)) if arr.size > 1 else 0.0,
+                'min': float(np.min(arr)),
+                'max': float(np.max(arr)),
+            }
+        bstats = stats(baseline_vals)
+        rrstats = stats(rr_vals)
+        # Write summary to report
+        with open('topic_comparison_report.txt', 'a', encoding='utf-8') as f:
+            f.write("\n" + "="*100 + "\n")
+            f.write("BASELINE vs RAW→RESOLVED KL SUMMARY\n")
+            f.write("="*100 + "\n")
+            f.write("Metric, Baseline KL, Raw→Resolved KL\n")
+            f.write(f"Count, {bstats['count']}, {rrstats['count']}\n")
+            f.write(f"Mean, {bstats['mean']:.4f}, {rrstats['mean']:.4f}\n")
+            f.write(f"Median, {bstats['median']:.4f}, {rrstats['median']:.4f}\n")
+            f.write(f"StdDev, {bstats['std']:.4f}, {rrstats['std']:.4f}\n")
+            f.write(f"Min, {bstats['min']:.4f}, {rrstats['min']:.4f}\n")
+            f.write(f"Max, {bstats['max']:.4f}, {rrstats['max']:.4f}\n")
+            # Simple interpretation line
+            delta_mean = rrstats['mean'] - bstats['mean']
+            f.write(f"\nInterpretation: Raw→Resolved mean KL is {delta_mean:+.4f} higher than baseline, indicating transformation impact beyond seed variability.\n")
+        print("Baseline vs Raw→Resolved KL summary appended to report.")
+        # Generate histogram plot (professional style)
+        try:
+            plt.figure(figsize=(8, 5))
+            bins = 10
+            # Histograms
+            plt.hist(baseline_vals, bins=bins, alpha=0.6, label='Baseline KL', color='#1f77b4')
+            plt.hist(rr_vals, bins=bins, alpha=0.6, label='Raw→Resolved KL', color='#ff7f0e')
+            # Mean markers
+            b_mean = np.mean(baseline_vals) if baseline_vals else 0.0
+            rr_mean = np.mean(rr_vals) if rr_vals else 0.0
+            plt.axvline(b_mean, color='#1f77b4', linestyle='--', linewidth=2, label=f'Baseline mean={b_mean:.3f}')
+            plt.axvline(rr_mean, color='#ff7f0e', linestyle='--', linewidth=2, label=f'Raw→Resolved mean={rr_mean:.3f}')
+            plt.title('KL Divergence Distribution: Baseline vs Raw→Resolved')
+            plt.xlabel('KL divergence')
+            plt.ylabel('Count')
+            plt.legend()
+            plt.tight_layout()
+            plt.savefig('kl_histogram.png')
+            plt.close()
+            print("Saved KL histogram to kl_histogram.png")
+        except Exception as pe:
+            print(f"Failed to save histogram: {pe}")
+        # Additional plots for other metrics (raw→resolved only) using KDE density plots
+        try:
+            def kde_plot(values, title, outfile, xlabel, color, xlim=None):
+                data = np.array(values, dtype=float)
+                if data.size == 0:
+                    return
+                plt.figure(figsize=(8, 5))
+                try:
+                    kde = gaussian_kde(data)
+                    xmin = float(np.min(data)) if xlim is None else xlim[0]
+                    xmax = float(np.max(data)) if xlim is None else xlim[1]
+                    # Expand a bit for nicer tails
+                    rng = xmax - xmin
+                    xmin -= 0.05 * rng
+                    xmax += 0.05 * rng
+                    xs = np.linspace(xmin, xmax, 256)
+                    plt.plot(xs, kde(xs), color=color, linewidth=2, label='Density')
+                except Exception:
+                    # Fallback: smoothed histogram line
+                    counts, bin_edges = np.histogram(data, bins=10, density=True)
+                    centers = 0.5 * (bin_edges[:-1] + bin_edges[1:])
+                    plt.plot(centers, counts, color=color, linewidth=2, label='Density (binned)')
+                mean_val = float(np.mean(data))
+                plt.axvline(mean_val, color='red', linestyle='--', linewidth=2, label=f'Mean = {mean_val:.3f}')
+                plt.title(title)
+                plt.xlabel(xlabel)
+                plt.ylabel('Density')
+                plt.legend()
+                plt.tight_layout()
+                plt.savefig(outfile)
+                plt.close()
+                print(f'Saved {title} to {outfile}')
+
+            if cos_vals:
+                kde_plot(cos_vals, 'Cosine Similarity Density (Matched Topics)', 'cosine_density.png', 'Cosine Similarity', '#2ca02c', xlim=(0.0, 1.0))
+            if skl_vals:
+                kde_plot(skl_vals, 'Symmetric KL Density (Matched Topics)', 'symkl_density.png', 'Symmetric KL', '#9467bd')
+            if js_vals:
+                kde_plot(js_vals, 'Jensen–Shannon Distance Density (Matched Topics)', 'js_density.png', 'JS Distance', '#8c564b', xlim=(0.0, 1.0))
+            if jaccard_per_topic:
+                kde_plot(jaccard_per_topic, 'Top-20 Jaccard Density (Matched Topics)', 'jaccard_density.png', 'Jaccard (Top-20)', '#e377c2', xlim=(0.0, 1.0))
+        except Exception as me:
+            print(f"Failed to save metric density plots: {me}")
+    except Exception as e:
+        print(f"Failed to append KL summary: {e}")
+
 
 if __name__ == "__main__":
     main()
