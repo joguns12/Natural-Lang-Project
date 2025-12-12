@@ -57,6 +57,8 @@ def run_interactive():
             return paragraph
     
     def run_dataset_mode(nlp, file_path="dpr_train.csv", sample_size=5):
+        resolved_results = []
+
         print(f"\nLoading dataset from: {file_path}")
         df = pd.read_csv(file_path)
         # sample random examples from dataset
@@ -77,6 +79,18 @@ def run_interactive():
             print(f"Candidates: {candidates}")
             resolved = resolve_pronouns(nlp, sentence)
             print(f"Resolved: {resolved}")
+
+            resolved_results.append({
+            "original": sentence,
+            "resolved": resolved,
+            "pronoun": row["pronoun"],
+            "candidates": row["candidates"],
+            })
+
+        df_resolved = pd.DataFrame(resolved_results)
+        df_resolved.to_csv("resolved_dataset.csv", index=False)
+        print("\n[Saved resolved dataset to resolved_dataset.csv]")
+
     
     nlp = load_model()
     print("\nChoose mode:")
@@ -92,6 +106,7 @@ def run_interactive():
         print(paragraph)
         print("\n[Resolved Paragraph]:")
         print(resolved_text)
+
     elif choice == "2":
         run_dataset_mode(nlp)
     else:

@@ -5,6 +5,8 @@ import spacy
 import coreferee
 import pandas as pd
 import re
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
 def load_model():
     # Load spaCy model with coreference resolution
@@ -45,6 +47,62 @@ def resolve_pronouns_with_details(nlp, sentence, pronoun, candidates):
     
     return resolved_text, resolved_candidate_idx
 
+
+def compute_perplexity_for_batch(text_list, model, tokenizer, batch_size=16):
+    p = []
+
+    for i in range(0, len(text_list), batch_size):
+        batch = text_list[i:i+batch_size]
+
+        inputs = tokenizer(batch, return_tensors="pt", padding=True, truncation=True)
+
+        input_ids = inputs["input_ids"]
+        attention_mask = inputs["attention_mask"]
+
+        with torch.no_grad():
+            outputs = model(input_ids, attention_mask=attention_mask)
+            logits = outputs.logits
+
+        shift_logits = logits[:, :-1, :] 
+        shift_labels = input_ids[:, 1:] 
+
+        log_probs = torch.nn.functional.log_softmax(shift_logits, dim=-1)
+        target_log_probs = log_probs.gather(dim=-1, index=shift_labels.unsqueeze(-1)).squeeze(-1)
+        target_log_probs = target_log_probs * attention_mask[:, 1:].to(log_probs.dtype)
+        negative_log_likelihood = -target_log_probs.sum(dim=-1) / attention_mask[:, 1:].sum(dim=-1)
+
+        perplexities = torch.exp(negative_log_likelihood).tolist()
+        p.extend(perplexities)
+
+    mean_perplexity_score = sum(p) / len(p)
+
+    return {
+        "perplexities": p,
+        "mean_perplexity": mean_perplexity_score
+    }
+
+def evaluate_perplexity():
+    df = pd.read_csv('dpr_train.csv')
+    sample = df["sentence"].tolist()
+
+    df_resolved = pd.read_csv('resolved_dataset.csv')
+    sample_resolved = df_resolved["resolved"].tolist()
+
+    # Load pre-trained GPT-2 model and tokenizer
+    model_name = "gpt2"
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+
+    # Assign the EOS token as the padding token
+    tokenizer.pad_token = tokenizer.eos_token
+
+    results = compute_perplexity_for_batch(sample, model, tokenizer)
+    print(f"Mean perplexity score: {results['mean_perplexity']}")
+
+    results_resolved = compute_perplexity_for_batch(sample_resolved, model, tokenizer)
+    print(f"Mean perplexity score of resolved: {results_resolved['mean_perplexity']}")
+
+
 def evaluate_accuracy():
     # Evaluate pronoun resolution accuracy on the entire dpr_train.csv
     nlp = load_model()
@@ -52,7 +110,7 @@ def evaluate_accuracy():
     print(f"\nLoading dataset...")
     df = pd.read_csv('dpr_train.csv')
     sample = df  # use all rows
-    
+
     correct = 0
     total = 0
     results = []
@@ -77,7 +135,6 @@ def evaluate_accuracy():
             'correct': is_correct,
             'resolved_text': resolved_text
         })
-    # ...existing code...
     
     print("\n" + "=" * 100)
     # calculate accuracy percentage
@@ -95,3 +152,4 @@ def evaluate_accuracy():
 
 if __name__ == "__main__":
     evaluate_accuracy()
+    evaluate_perplexity()
