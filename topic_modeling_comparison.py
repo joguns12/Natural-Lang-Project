@@ -76,7 +76,7 @@ def preprocess_text(text):
     tokens = [token for token in tokens if token not in stop_words and len(token) > 2]
     return tokens
 
-def run_lda(documents, num_topics=8, num_words=20):
+def run_lda(documents, num_topics=8, num_words=20, random_state=42):
     print(f"Preprocessing {len(documents)} documents...")
     processed_docs = [preprocess_text(doc) for doc in documents]
     processed_docs = [doc for doc in processed_docs if len(doc) > 0]
@@ -87,7 +87,7 @@ def run_lda(documents, num_topics=8, num_words=20):
         corpus=corpus,
         id2word=dictionary,
         num_topics=num_topics,
-        random_state=42,
+        random_state=random_state,
         passes=5,
         per_word_topics=True,
         minimum_probability=0.0,
@@ -144,11 +144,13 @@ def main():
         'axes.labelsize': 'medium',
         'legend.frameon': False,
     })
-    # Configurable seeds for experimentation (used in baseline runs)
-    baseline_seeds = [42, 43]  # adjust to experiment
+    # Configurable seeds for repeated runs
+    num_runs = 5
+    baseline_seeds = [42, 43, 44, 45, 46][:num_runs]
     candidate_names = ["john", "mary", "bill", "bob", "jane", "jack", "jim", "joe", "susan", "jennifer"]
+
     print("\n" + "="*100)
-    print("TOPIC MODELING COMPARISON: Raw vs. Pronoun-Resolved Documents")
+    print("TOPIC MODELING COMPARISON: Raw vs. Pronoun-Resolved Documents (5x runs)")
     print("="*100)
 
     print("\nLoading dataset from dpr_train.csv and dpr_test.csv...")
@@ -163,16 +165,7 @@ def main():
         print(f"  {name}: {count}")
 
     print("\n" + "="*100)
-    print("PART 1: LDA on RAW DOCUMENTS")
-    print("="*100)
-    raw_topics, raw_model, raw_corpus, raw_dict = run_lda(documents, num_topics=8, num_words=20)
-    print("\n[RAW DOCUMENT TOPICS - Top 20 Words per Topic]")
-    print("-" * 100)
-    for topic_id, words in raw_topics.items():
-        print(f"Topic {topic_id}: {', '.join(words)}")
-
-    print("\n" + "="*100)
-    print("PART 2: Running Pronoun Resolution on Documents")
+    print("PART 1: Running Pronoun Resolution on Documents")
     print("="*100)
     nlp = load_model()
     print(f"\nResolving pronouns in {len(documents)} documents...")
@@ -202,161 +195,150 @@ def main():
     for name, raw_c, res_c, delta, pct in top_uplift:
         print(f"  {name}: raw={raw_c}, resolved={res_c}, delta={delta}, +{pct:.1f}%")
 
+    # Run LDA 5 times for raw and resolved, collect KL divergences
     print("\n" + "="*100)
-    print("PART 3: LDA on PRONOUN-RESOLVED DOCUMENTS")
+    print("PART 2: Repeated LDA and KL Divergence Computation")
     print("="*100)
-    resolved_topics, resolved_model, resolved_corpus, resolved_dict = run_lda(resolved_documents, num_topics=8, num_words=20)
-    print("\nRESOLVED DOCUMENT TOPICS - Top 20 Words per Topic:")
-    print("-" * 100)
-    for topic_id, words in resolved_topics.items():
-        print(f"Topic {topic_id}: {', '.join(words)}")
-
+    num_topics = 8
+    num_words = 20
+    
+    # Store models for all-pairs comparisons
+    raw_models = []
+    raw_dicts = []
+    resolved_models = []
+    resolved_dicts = []
+    
+    for i, seed in enumerate(baseline_seeds):
+        print(f"\nRun {i+1} / {num_runs} (seed={seed}) for RAW...")
+        raw_topics, raw_model, raw_corpus, raw_dict = run_lda(documents, num_topics=num_topics, num_words=num_words, random_state=seed)
+        raw_models.append(raw_model)
+        raw_dicts.append(raw_dict)
+        
+        print(f"Run {i+1} / {num_runs} (seed={seed}) for RESOLVED...")
+        resolved_topics, resolved_model, resolved_corpus, resolved_dict = run_lda(resolved_documents, num_topics=num_topics, num_words=num_words, random_state=seed)
+        resolved_models.append(resolved_model)
+        resolved_dicts.append(resolved_dict)
+    
+    # Compute all pairwise KL divergences for fair comparison
     print("\n" + "="*100)
-    print("PART 4: TOPIC MATCHING & KL DIVERGENCE")
+    print("Computing all pairwise KL divergences...")
     print("="*100)
-    # KL-based one-to-one matching between RAW and RESOLVED
-    M_rr = topic_kl_matrix(raw_model, raw_dict, resolved_model, resolved_dict, num_topics=8)
-    row_ind, col_ind = linear_sum_assignment(M_rr)  # minimize total KL
-    matches = [(int(r), int(c), float(M_rr[r, c])) for r, c in zip(row_ind, col_ind)]
-    used_raw = set(row_ind.tolist()) if hasattr(row_ind, 'tolist') else set(row_ind)
-    used_res = set(col_ind.tolist()) if hasattr(col_ind, 'tolist') else set(col_ind)
-    unmatched_raw = set(range(8)) - used_raw
-    unmatched_resolved = set(range(8)) - used_res
-    print("Matched topic pairs (RAW -> RESOLVED) by KL:")
-    for r, c, v in matches:
-        print(f"  Raw {r} -> Resolved {c} (KL={v:.4f})")
-    print(f"Unmatched raw topics: {sorted(list(unmatched_raw)) if unmatched_raw else 'None'}")
-    print(f"Unmatched resolved topics: {sorted(list(unmatched_resolved)) if unmatched_resolved else 'None'}")
-
-    print("\nKL divergence for matched topic pairs:")
-    kl_values = [v for _, _, v in matches]
-    kl_pairs = matches
-    print(f"\nAverage KL divergence (RAW vs RESOLVED): {np.mean(kl_values):.4f}")
-    print(f"KL divergence values: {[round(k, 4) for k in kl_values]}")
+    
+    # 1. RAW vs RESOLVED (different seeds - fair comparison with consecutive)
+    kl_raw_vs_resolved = []
+    for i in range(num_runs):
+        for j in range(num_runs):
+            if i != j:  # Don't compare same seed
+                M = topic_kl_matrix(raw_models[i], raw_dicts[i], resolved_models[j], resolved_dicts[j], num_topics=num_topics)
+                row_ind, col_ind = linear_sum_assignment(M)
+                kl_vals = [float(M[r, c]) for r, c in zip(row_ind, col_ind)]
+                kl_raw_vs_resolved.append(np.mean(kl_vals))
+    
+    # 2. RAW vs RAW (different seeds)
+    kl_raw_vs_raw = []
+    for i in range(num_runs):
+        for j in range(i+1, num_runs):  # Only upper triangle to avoid duplicates
+            M = topic_kl_matrix(raw_models[i], raw_dicts[i], raw_models[j], raw_dicts[j], num_topics=num_topics)
+            row_ind, col_ind = linear_sum_assignment(M)
+            kl_vals = [float(M[r, c]) for r, c in zip(row_ind, col_ind)]
+            kl_raw_vs_raw.append(np.mean(kl_vals))
+    
+    # 3. RESOLVED vs RESOLVED (different seeds)
+    kl_resolved_vs_resolved = []
+    for i in range(num_runs):
+        for j in range(i+1, num_runs):  # Only upper triangle to avoid duplicates
+            M = topic_kl_matrix(resolved_models[i], resolved_dicts[i], resolved_models[j], resolved_dicts[j], num_topics=num_topics)
+            row_ind, col_ind = linear_sum_assignment(M)
+            kl_vals = [float(M[r, c]) for r, c in zip(row_ind, col_ind)]
+            kl_resolved_vs_resolved.append(np.mean(kl_vals))
+    
+    # Store matches from first RAW vs RESOLVED comparison for CSV export
+    M_export = topic_kl_matrix(raw_models[0], raw_dicts[0], resolved_models[1], resolved_dicts[1], num_topics=num_topics)
+    row_ind, col_ind = linear_sum_assignment(M_export)
+    kl_pairs = [(int(r), int(c), float(M_export[r, c])) for r, c in zip(row_ind, col_ind)]
 
     print("\n" + "="*100)
-    print("SUMMARY STATISTICS")
+    print("RESULTS: KL Divergence Across All Pairwise Comparisons")
     print("="*100)
-    all_raw_words = set()
-    all_resolved_words = set()
-    for topic_id in range(8):
-        all_raw_words.update(raw_topics[topic_id])
-        all_resolved_words.update(resolved_topics[topic_id])
-    common_all = all_raw_words & all_resolved_words
-    unique_raw = all_raw_words - all_resolved_words
-    unique_resolved = all_resolved_words - all_raw_words
-    print(f"\nTotal unique words (raw): {len(all_raw_words)}")
-    print(f"Total unique words (resolved): {len(all_resolved_words)}")
-    print(f"Common words across both: {len(common_all)}")
-    print(f"Words unique to raw: {len(unique_raw)}")
-    print(f"Words unique to resolved: {len(unique_resolved)}")
-    # Additional, more informative similarity metrics
-    # 1) Dictionary-level Jaccard over full vocabularies
-    raw_vocab = set(raw_dict.token2id.keys())
-    resolved_vocab = set(resolved_dict.token2id.keys())
-    jaccard_dict = (len(raw_vocab & resolved_vocab) / len(raw_vocab | resolved_vocab)) if (raw_vocab or resolved_vocab) else 0.0
+    
+    mean_raw_vs_resolved = np.mean(kl_raw_vs_resolved)
+    mean_raw_vs_raw = np.mean(kl_raw_vs_raw)
+    mean_resolved_vs_resolved = np.mean(kl_resolved_vs_resolved)
+    
+    print(f"\n1. RAW vs RESOLVED (different seeds, {len(kl_raw_vs_resolved)} pairs):")
+    print(f"   Mean: {mean_raw_vs_resolved:.4f}")
+    print(f"   Std:  {np.std(kl_raw_vs_resolved):.4f}")
+    print(f"   Range: [{min(kl_raw_vs_resolved):.4f}, {max(kl_raw_vs_resolved):.4f}]")
+    
+    print(f"\n2. RAW vs RAW (different seeds, {len(kl_raw_vs_raw)} pairs):")
+    print(f"   Mean: {mean_raw_vs_raw:.4f}")
+    print(f"   Std:  {np.std(kl_raw_vs_raw):.4f}")
+    print(f"   Range: [{min(kl_raw_vs_raw):.4f}, {max(kl_raw_vs_raw):.4f}]")
+    
+    print(f"\n3. RESOLVED vs RESOLVED (different seeds, {len(kl_resolved_vs_resolved)} pairs):")
+    print(f"   Mean: {mean_resolved_vs_resolved:.4f}")
+    print(f"   Std:  {np.std(kl_resolved_vs_resolved):.4f}")
+    print(f"   Range: [{min(kl_resolved_vs_resolved):.4f}, {max(kl_resolved_vs_resolved):.4f}]")
+    
+    # Effect size calculation
+    effect_above_raw_noise = mean_raw_vs_resolved - mean_raw_vs_raw
+    effect_above_resolved_noise = mean_raw_vs_resolved - mean_resolved_vs_resolved
+    
+    print(f"\n" + "="*100)
+    print("INTERPRETATION:")
+    print("="*100)
+    print(f"Pronoun effect above RAW seed noise:      {effect_above_raw_noise:+.4f} ({effect_above_raw_noise/mean_raw_vs_raw*100:+.1f}%)")
+    print(f"Pronoun effect above RESOLVED seed noise: {effect_above_resolved_noise:+.4f} ({effect_above_resolved_noise/mean_resolved_vs_resolved*100:+.1f}%)")
+    if mean_resolved_vs_resolved < mean_raw_vs_raw:
+        print(f"RESOLVED topics are MORE stable (lower seed variation by {(1-mean_resolved_vs_resolved/mean_raw_vs_raw)*100:.1f}%)")
+    else:
+        print(f"RESOLVED topics are LESS stable (higher seed variation by {(mean_resolved_vs_resolved/mean_raw_vs_raw-1)*100:.1f}%)")
 
-    # 2) Mean per-topic Jaccard over top-20 words after KL-based matching
-    jaccard_per_topic = []
-    for r, c, _ in matches:
-        rw = set(raw_topics[r])
-        zw = set(resolved_topics[c])
-        union = rw | zw
-        inter = rw & zw
-        jaccard_per_topic.append((len(inter) / len(union)) if union else 0.0)
-    mean_jaccard_top20 = float(np.mean(jaccard_per_topic)) if jaccard_per_topic else 0.0
-
-    # 3) Cosine similarity, Symmetric KL, and Jensen–Shannon distance over matched topic distributions
-    # Build union vocab once (same as topic_kl_matrix) and precompute distributions
-    vocab_l = raw_dict.token2id
-    vocab_r = resolved_dict.token2id
-    union_vocab = list(set(vocab_l.keys()) | set(vocab_r.keys()))
-    union_word2id = {w: i for i, w in enumerate(union_vocab)}
-    def topic_dist(model, dict_, t):
-        dist = np.zeros(len(union_vocab))
-        terms = dict(model.get_topic_terms(t, topn=len(dict_.token2id)))
-        for w, i in union_word2id.items():
-            wid = dict_.token2id.get(w)
-            dist[i] = terms.get(wid, 1e-12) if wid is not None else 1e-12
-        s = dist.sum()
-        return dist / s if s > 0 else dist
-
-    def cosine(a, b):
-        na = np.linalg.norm(a)
-        nb = np.linalg.norm(b)
-        return float(np.dot(a, b) / (na * nb)) if na > 0 and nb > 0 else 0.0
-
-    def sym_kl(a, b):
-        return 0.5 * (kl_divergence(a, b) + kl_divergence(b, a))
-
-    def js_distance(a, b):
-        m = 0.5 * (a + b)
-        js_div = 0.5 * (kl_divergence(a, m) + kl_divergence(b, m))
-        return float(np.sqrt(js_div))
-
-    cos_vals, skl_vals, js_vals = [], [], []
-    for r, c, _ in matches:
-        pr = topic_dist(raw_model, raw_dict, r)
-        qr = topic_dist(resolved_model, resolved_dict, c)
-        cos_vals.append(cosine(pr, qr))
-        skl_vals.append(sym_kl(pr, qr))
-        js_vals.append(js_distance(pr, qr))
-
-    mean_cosine = float(np.mean(cos_vals)) if cos_vals else 0.0
-    mean_symkl = float(np.mean(skl_vals)) if skl_vals else 0.0
-    mean_js = float(np.mean(js_vals)) if js_vals else 0.0
-
-    print(f"\nOverall similarity (top-20 overlap ratio): {100*len(common_all)/max(len(all_raw_words), len(all_resolved_words)):.1f}%")
-    print(f"Dictionary Jaccard: {jaccard_dict:.3f}")
-    print(f"Mean matched-topic Jaccard (top-20): {mean_jaccard_top20:.3f}")
-    print(f"Mean cosine similarity (matched topics): {mean_cosine:.3f}")
-    print(f"Mean symmetric KL (matched topics): {mean_symkl:.3f}")
-    print(f"Mean JS distance (matched topics): {mean_js:.3f}")
-
-    print("\n" + "="*100)
-    print("Saving detailed comparison to 'topic_comparison_report.txt'...")
-    with open('topic_comparison_report.txt', 'w', encoding='utf-8') as f:
-        f.write("="*100 + "\n")
-        f.write("TOPIC MODELING COMPARISON: Raw vs. Pronoun-Resolved Documents\n")
-        f.write("="*100 + "\n\n")
-        # Name uplift section
-        f.write("Name Uplift (Raw vs Pronoun-Resolved)\n")
-        f.write("-"*100 + "\n")
-        f.write("name, raw_count, resolved_count, delta, percent_increase\n")
-        for name, raw_c, res_c, delta, pct in uplift_rows:
-            f.write(f"{name}, {raw_c}, {res_c}, {delta}, {pct:.1f}%\n")
-        f.write("\n")
-        for topic_id in range(8):
-            raw_words = set(raw_topics[topic_id])
-            resolved_words = set(resolved_topics[topic_id])
-            common = raw_words & resolved_words
-            only_raw = raw_words - resolved_words
-            only_resolved = resolved_words - raw_words
-            f.write(f"\n--- Topic {topic_id} ---\n")
-            f.write(f"[RAW DOCUMENTS (Top 20)]:\n")
-            f.write(f"  {', '.join(raw_topics[topic_id])}\n")
-            f.write(f"[RESOLVED DOCUMENTS (Top 20)]:\n")
-            f.write(f"  {', '.join(resolved_topics[topic_id])}\n")
-            f.write(f"[ANALYSIS]:\n")
-            f.write(f"  Common words: {len(common)}/20 ({100*len(common)/20:.1f}%)\n")
-            f.write(f"  Words in raw only: {', '.join(only_raw) if only_raw else 'None'}\n")
-            f.write(f"  Words in resolved only: {', '.join(only_resolved) if only_resolved else 'None'}\n")
-        f.write(f"\n\n{'='*100}\n")
-        f.write("SUMMARY STATISTICS\n")
-        f.write(f"{'='*100}\n\n")
-        f.write(f"Total unique words (raw): {len(all_raw_words)}\n")
-        f.write(f"Total unique words (resolved): {len(all_resolved_words)}\n")
-        f.write(f"Common words across both: {len(common_all)}\n")
-        f.write(f"Words unique to raw: {len(unique_raw)}\n")
-        f.write(f"Words unique to resolved: {len(unique_resolved)}\n")
-        # Write enhanced metrics
-        f.write(f"Overall similarity (top-20 overlap ratio): {100*len(common_all)/max(len(all_raw_words), len(all_resolved_words)):.1f}%\n")
-        f.write(f"Dictionary Jaccard: {jaccard_dict:.3f}\n")
-        f.write(f"Mean matched-topic Jaccard (top-20): {mean_jaccard_top20:.3f}\n")
-        f.write(f"Mean cosine similarity (matched topics): {mean_cosine:.3f}\n")
-        f.write(f"Mean symmetric KL (matched topics): {mean_symkl:.3f}\n")
-        f.write(f"Mean JS distance (matched topics): {mean_js:.3f}\n")
-    print("Report saved!")
+    # Create single comprehensive visualization
+    try:
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        # Histogram with overlays
+        bins = np.linspace(min(min(kl_raw_vs_raw), min(kl_resolved_vs_resolved), min(kl_raw_vs_resolved)),
+                          max(max(kl_raw_vs_raw), max(kl_resolved_vs_resolved), max(kl_raw_vs_resolved)), 15)
+        
+        colors = ['#1f77b4', '#2ca02c', '#ff7f0e']
+        labels = ['RAW vs RAW (Seed Variation)', 'RESOLVED vs RESOLVED (Seed Variation)', 'RAW vs RESOLVED (Pronoun Effect)']
+        data_sets = [kl_raw_vs_raw, kl_resolved_vs_resolved, kl_raw_vs_resolved]
+        means = [mean_raw_vs_raw, mean_resolved_vs_resolved, mean_raw_vs_resolved]
+        
+        # Plot histograms
+        for data, color, label in zip(data_sets, colors, labels):
+            ax.hist(data, bins=bins, alpha=0.6, color=color, label=label, edgecolor='black', linewidth=0.5)
+        
+        # Add mean lines
+        for mean_val, color, label in zip(means, colors, labels):
+            ax.axvline(mean_val, color=color, linestyle='--', linewidth=2.5, alpha=0.9)
+            ax.text(mean_val, ax.get_ylim()[1] * 0.95, f'μ={mean_val:.4f}', 
+                   rotation=90, va='top', ha='right', fontsize=9, fontweight='bold', color=color,
+                   bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor=color, alpha=0.8))
+        
+        # Add effect size annotation
+        y_pos = ax.get_ylim()[1] * 0.5
+        ax.annotate('', xy=(mean_raw_vs_resolved, y_pos), xytext=(mean_resolved_vs_resolved, y_pos),
+                   arrowprops=dict(arrowstyle='<->', color='red', lw=2.5))
+        ax.text((mean_raw_vs_resolved + mean_resolved_vs_resolved) / 2, y_pos + 0.3, 
+               f'Effect: +{effect_above_resolved_noise:.4f} (+{effect_above_resolved_noise/mean_resolved_vs_resolved*100:.1f}%)',
+               ha='center', va='bottom', fontsize=11, color='red', fontweight='bold',
+               bbox=dict(boxstyle='round,pad=0.5', facecolor='white', edgecolor='red', linewidth=2, alpha=0.9))
+        
+        ax.set_xlabel('KL Divergence', fontsize=12, fontweight='bold')
+        ax.set_ylabel('Frequency', fontsize=12, fontweight='bold')
+        ax.set_title('Topic Model Stability: KL Divergence Across Different Seeds', fontsize=14, fontweight='bold', pad=20)
+        ax.legend(loc='upper left', fontsize=10, framealpha=0.9)
+        ax.grid(axis='y', alpha=0.3, linestyle='--')
+        
+        plt.tight_layout()
+        plt.savefig('kl_across_runs.png', dpi=150, bbox_inches='tight')
+        plt.close()
+        print("\nSaved KL divergence comparison chart to kl_across_runs.png")
+    except Exception as e:
+        print(f"Failed to save KL runs chart: {e}")
 
     # Baseline: Two-run topic comparison on RAW documents
     print("\n" + "="*100)
@@ -526,14 +508,7 @@ def main():
                 plt.close()
                 print(f'Saved {title} to {outfile}')
 
-            if cos_vals:
-                kde_plot(cos_vals, 'Cosine Similarity Density (Matched Topics)', 'cosine_density.png', 'Cosine Similarity', '#2ca02c', xlim=(0.0, 1.0))
-            if skl_vals:
-                kde_plot(skl_vals, 'Symmetric KL Density (Matched Topics)', 'symkl_density.png', 'Symmetric KL', '#9467bd')
-            if js_vals:
-                kde_plot(js_vals, 'Jensen–Shannon Distance Density (Matched Topics)', 'js_density.png', 'JS Distance', '#8c564b', xlim=(0.0, 1.0))
-            if jaccard_per_topic:
-                kde_plot(jaccard_per_topic, 'Top-20 Jaccard Density (Matched Topics)', 'jaccard_density.png', 'Jaccard (Top-20)', '#e377c2', xlim=(0.0, 1.0))
+            # Additional metric plots removed (cos_vals, skl_vals, js_vals, jaccard_per_topic not computed)
         except Exception as me:
             print(f"Failed to save metric density plots: {me}")
     except Exception as e:
